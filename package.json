@@ -4,7 +4,7 @@
 	"private": true,
 	"description": "DWS-Packages is a collection of packages developed by DWS for various purposes, like apis, utilities, and more.",
 	"license": "MIT",
-	"author": "DWS",
+	"author": "Dominus Web Services (DWS)",
 	"workspaces": {
 		"packages": ["packages/*"],
 		"catalogs": {
