@@ -63,7 +63,7 @@ describe.concurrent('HttpError', (): void => {
 		});
 	});
 
-	describe.concurrent('is_client_error / is_server_error', (): void => {
+	describe.concurrent('isClientError / isServerError', (): void => {
 		test('should classify 4xx codes as client errors', (): void => {
 			const codes: (keyof typeof HTTP_STATUS_CODES)[] = [
 				'BAD_REQUEST',
@@ -77,8 +77,8 @@ describe.concurrent('HttpError', (): void => {
 
 			for (const code of codes) {
 				const error = new HttpError('client err', code);
-				expect(error.is_client_error).toBe(true);
-				expect(error.is_server_error).toBe(false);
+				expect(error.isClientError).toBe(true);
+				expect(error.isServerError).toBe(false);
 			}
 		});
 
@@ -92,16 +92,16 @@ describe.concurrent('HttpError', (): void => {
 
 			for (const code of codes) {
 				const error = new HttpError('server err', code);
-				expect(error.is_server_error).toBe(true);
-				expect(error.is_client_error).toBe(false);
+				expect(error.isServerError).toBe(true);
+				expect(error.isClientError).toBe(false);
 			}
 		});
 
 		test('should classify 2xx/3xx as neither client nor server error', (): void => {
 			const error = new HttpError('ok', 200);
 
-			expect(error.is_client_error).toBe(false);
-			expect(error.is_server_error).toBe(false);
+			expect(error.isClientError).toBe(false);
+			expect(error.isServerError).toBe(false);
 		});
 	});
 
