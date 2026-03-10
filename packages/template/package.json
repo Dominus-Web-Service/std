@@ -1,0 +1,35 @@
+{
+	"name": "@dws/template",
+	"version": "1.0.0",
+	"description": "A template",
+	"keywords": [
+		"template"
+	],
+	"license": "MIT",
+	"author": "DWS",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Dominus-Web-Service/packages",
+		"directory": "packages/template"
+	},
+	"type": "module",
+	"exports": {
+		".": "./dist/index.js"
+	},
+	"scripts": {
+		"build": "bun builder.ts",
+		"fmt:check": "oxfmt --check",
+		"fmt": "oxfmt",
+		"lint:fix": "oxlint --type-aware --type-check --fix ./src",
+		"lint:github": "oxlint --type-aware --type-check --format=github ./src",
+		"lint": "oxlint --type-aware --type-check  ./src",
+		"test": "bun test --pass-with-no-tests --coverage"
+	},
+	"devDependencies": {
+		"@types/bun": "catalog:base",
+		"oxfmt": "catalog:base",
+		"oxlint-tsgolint": "catalog:base",
+		"oxlint": "catalog:base",
+		"typescript": "catalog:base"
+	}
+}
