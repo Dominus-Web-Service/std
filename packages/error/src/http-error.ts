@@ -25,11 +25,11 @@ export class HttpError<const TCause = unknown> extends AppError<TCause> {
 		this.httpStatusCode = status;
 	}
 
-	public get isClientError(): boolean {
+	public get is_client_error(): boolean {
 		return this.httpStatusCode >= 400 && this.httpStatusCode < 500;
 	}
 
-	public get isServerError(): boolean {
+	public get is_server_error(): boolean {
 		return this.httpStatusCode >= 500 && this.httpStatusCode < 600;
 	}
 }
