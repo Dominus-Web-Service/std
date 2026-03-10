@@ -1,0 +1,13 @@
+{
+	"typedocOptions": {
+		"entryPointStrategy": "packages",
+		"entryPoints": ["packages/error"],
+		"out": "docs",
+		"name": "DWS Packages",
+		"hideGenerator": true,
+		"customFooterHtml": "<p>Generated with ❤️</p>",
+		"packageOptions": {
+			"tsconfig": "./tsconfig.build.json"
+		}
+	}
+}

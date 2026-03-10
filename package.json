@@ -1,0 +1,30 @@
+{
+	"name": "dws-packages",
+	"version": "1.0.0",
+	"private": true,
+	"description": "DWS-Packages is a collection of packages developed by DWS for various purposes, like apis, utilities, and more.",
+	"license": "MIT",
+	"author": "DWS",
+	"workspaces": {
+		"packages": ["packages/*"],
+		"catalogs": {
+			"base": {
+				"@types/bun": "^1.3.10",
+				"oxfmt": "^0.27.0",
+				"oxlint-tsgolint": "^0.11.3",
+				"oxlint": "^1.42.0",
+				"typescript": "^5.9.3"
+			}
+		}
+	},
+	"type": "module",
+	"scripts": {
+		"clean": "find . -name 'node_modules' -not -path '*/.git/*' -prune -exec rm -rf {} + ; find . -name 'bun.lock' -not -path '*/.git/*' -delete",
+		"build": "bun --filter '!@dws/template' build",
+		"test": "bun --filter '!@dws/template' test",
+		"lint": "bun --filter '!@dws/template' lint",
+		"lint:fix": "bun --filter '!@dws/template' lint:fix",
+		"lint:github": "bun --filter '!@dws/template' lint:github",
+		"docs": "bunx typedoc --tsconfig tsconfig.build.json"
+	}
+}
