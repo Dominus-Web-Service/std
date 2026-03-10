@@ -37,8 +37,10 @@
 		"lint": "oxlint --type-aware --type-check ./src",
 		"test": "bun test --pass-with-no-tests --coverage"
 	},
+	"dependencies": {
+		"@dws/error": "workspace:*"
+	},
 	"devDependencies": {
-		"@dws/error": "workspace:*",
 		"@types/bun": "catalog:base",
 		"oxfmt": "catalog:base",
 		"oxlint": "catalog:base",

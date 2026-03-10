@@ -19,8 +19,10 @@
     "packages/singleton-manager": {
       "name": "@dws/singleton-manager",
       "version": "1.0.0",
-      "devDependencies": {
+      "dependencies": {
         "@dws/error": "workspace:*",
+      },
+      "devDependencies": {
         "@types/bun": "catalog:base",
         "oxfmt": "catalog:base",
         "oxlint": "catalog:base",
