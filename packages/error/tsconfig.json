@@ -22,6 +22,10 @@
 		"moduleResolution": "bundler",
 		"moduleDetection": "force",
 		"noUncheckedSideEffectImports": true,
+		"paths": {
+			"#/*": ["./src/*"],
+			"#/root/*": ["./*"],
+		},
 		"resolveJsonModule": true,
 		// —————————————— Emit —————————————— //
 		"outDir": "./dist",

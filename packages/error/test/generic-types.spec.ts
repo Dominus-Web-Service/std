@@ -1,7 +1,7 @@
 import { describe, expectTypeOf, test } from 'bun:test';
 
-import { AppError } from '../src/app-error';
-import { HttpError } from '../src/http-error';
+import { AppError } from '#/app-error';
+import { HttpError } from '#/http-error';
 
 describe('Generic type TCause', (): void => {
 	test('AppError cause should be typed when generic is provided', (): void => {

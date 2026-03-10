@@ -7,7 +7,4 @@
 		"emitDeclarationOnly": true,
 		"declaration": true
 	},
-	"typedocOptions": {
-		"entryPoints": ["src/index.ts", "src/enums/index.ts"]
-	}
 }

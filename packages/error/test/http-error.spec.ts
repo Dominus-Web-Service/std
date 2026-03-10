@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'bun:test';
 
-import { AppError } from '../src/app-error';
-import { HTTP_STATUS_CODES } from '../src/enums/http-status-codes';
-import { HttpError } from '../src/http-error';
+import { AppError } from '#/app-error';
+import { HTTP_STATUS_CODES } from '#/enums/http-status-codes';
+import { HttpError } from '#/http-error';
 
 describe.concurrent('HttpError', (): void => {
 	test('should extend AppError and Error', (): void => {

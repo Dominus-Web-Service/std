@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test';
 
-import { AppError } from '../src/app-error';
+import { AppError } from '#/app-error';
 
 describe.concurrent('AppError', (): void => {
 	test('should be an instance of Error and AppError', (): void => {
