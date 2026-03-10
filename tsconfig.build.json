@@ -14,6 +14,7 @@
 			}
 		},
 		"packageOptions": {
+			"includeVersion": true,
 			"tsconfig": "./tsconfig.build.json"
 		}
 	}
