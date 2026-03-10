@@ -16,6 +16,21 @@
         "typescript": "catalog:base",
       },
     },
+    "packages/singleton-manager": {
+      "name": "@dws/singleton-manager",
+      "version": "1.0.0",
+      "devDependencies": {
+        "@dws/error": "workspace:*",
+        "@types/bun": "catalog:base",
+        "oxfmt": "catalog:base",
+        "oxlint": "catalog:base",
+        "oxlint-tsgolint": "catalog:base",
+        "typescript": "catalog:base",
+      },
+      "peerDependencies": {
+        "@dws/error": "workspace:*",
+      },
+    },
     "packages/template": {
       "name": "@dws/template",
       "version": "1.0.0",
@@ -39,6 +54,8 @@
   },
   "packages": {
     "@dws/error": ["@dws/error@workspace:packages/error"],
+
+    "@dws/singleton-manager": ["@dws/singleton-manager@workspace:packages/singleton-manager"],
 
     "@dws/template": ["@dws/template@workspace:packages/template"],
 
