@@ -1,5 +1,5 @@
 {
-	"name": "@dws/singleton-manager",
+	"name": "@dws-std/singleton-manager",
 	"version": "1.0.0",
 	"description": "Singleton Manager is a package that provides a simple way to manage singletons in your application. It allows you to create, retrieve, and manage singletons with ease and type safety.",
 	"keywords": [
@@ -17,6 +17,7 @@
 		"directory": "packages/singleton-manager"
 	},
 	"type": "module",
+	"files": ["dist"],
 	"exports": {
 		"./enums": {
 			"types": "./dist/enums/index.d.ts",

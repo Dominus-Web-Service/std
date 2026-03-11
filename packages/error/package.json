@@ -1,5 +1,5 @@
 {
-	"name": "@dws/error",
+	"name": "@dws-std/error",
 	"version": "1.0.0",
 	"description": "A collection of error classes for Dominus Web Services (DWS) projects.",
 	"keywords": [
@@ -16,6 +16,7 @@
 		"directory": "packages/error"
 	},
 	"type": "module",
+	"files": ["dist"],
 	"exports": {
 		"./enums": {
 			"types": "./dist/enums/index.d.ts",

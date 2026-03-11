@@ -1,5 +1,5 @@
 {
-	"name": "@dws/template",
+	"name": "@dws-std/template",
 	"version": "1.0.0",
 	"description": "A template",
 	"keywords": [
@@ -13,6 +13,7 @@
 		"directory": "packages/template"
 	},
 	"type": "module",
+	"files": ["dist"],
 	"exports": {
 		".": "./dist/index.js"
 	},
