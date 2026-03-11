@@ -1,0 +1,21 @@
+{
+	"typedocOptions": {
+		"entryPointStrategy": "packages",
+		"entryPoints": ["packages/error", "packages/singleton-manager"],
+		"out": "docs",
+		"name": "DWS Packages",
+		"hideGenerator": true,
+		"customFooterHtml": "<p>Generated with ❤️</p>",
+		"externalSymbolLinkMappings": {
+			"@dws/error": {
+				"InternalError": "_dws_error..InternalError.html",
+				"AppError": "_dws_error..AppError.html",
+				"HttpError": "_dws_error..HttpError.html"
+			}
+		},
+		"packageOptions": {
+			"includeVersion": true,
+			"tsconfig": "./tsconfig.build.json"
+		}
+	}
+}

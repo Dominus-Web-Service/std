@@ -1,0 +1,47 @@
+{
+	"name": "@dws-std/error",
+	"version": "1.0.0",
+	"description": "A collection of error classes for Dominus Web Services (DWS) projects.",
+	"keywords": [
+		"bun",
+		"error",
+		"dws",
+		"dws-error"
+	],
+	"license": "MIT",
+	"author": "Dominus Web Services (DWS)",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Dominus-Web-Service/packages",
+		"directory": "packages/error"
+	},
+	"type": "module",
+	"files": ["dist"],
+	"exports": {
+		"./enums": {
+			"types": "./dist/enums/index.d.ts",
+			"default": "./dist/enums/index.js"
+		},
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		}
+	},
+	"scripts": {
+		"build": "bun builder.ts",
+		"docs": "bunx typedoc --tsconfig tsconfig.build.json",
+		"fmt:check": "oxfmt --check",
+		"fmt": "oxfmt",
+		"lint:fix": "oxlint --type-aware --type-check --fix ./src",
+		"lint:github": "oxlint --type-aware --type-check --format=github ./src",
+		"lint": "oxlint --type-aware --type-check ./src",
+		"test": "bun test --pass-with-no-tests --coverage"
+	},
+	"devDependencies": {
+		"@types/bun": "catalog:base",
+		"oxfmt": "catalog:base",
+		"oxlint": "catalog:base",
+		"oxlint-tsgolint": "catalog:base",
+		"typescript": "catalog:base"
+	}
+}
