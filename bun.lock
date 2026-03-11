@@ -20,7 +20,7 @@
       "name": "@dws-std/singleton-manager",
       "version": "1.0.0",
       "dependencies": {
-        "@dws-std/error": "workspace:*",
+        "@dws-std/error": "workspace:^",
       },
       "devDependencies": {
         "@types/bun": "catalog:base",
@@ -28,9 +28,6 @@
         "oxlint": "catalog:base",
         "oxlint-tsgolint": "catalog:base",
         "typescript": "catalog:base",
-      },
-      "peerDependencies": {
-        "@dws-std/error": "workspace:*",
       },
     },
     "packages/template": {

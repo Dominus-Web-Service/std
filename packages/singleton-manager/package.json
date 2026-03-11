@@ -39,16 +39,13 @@
 		"test": "bun test --pass-with-no-tests --coverage"
 	},
 	"dependencies": {
-		"@dws-std/error": "workspace:*"
+		"@dws-std/error": "workspace:^"
 	},
 	"devDependencies": {
 		"@types/bun": "catalog:base",
 		"oxfmt": "catalog:base",
-		"oxlint": "catalog:base",
 		"oxlint-tsgolint": "catalog:base",
+		"oxlint": "catalog:base",
 		"typescript": "catalog:base"
-	},
-	"peerDependencies": {
-		"@dws-std/error": "workspace:*"
 	}
 }
