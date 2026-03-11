@@ -29,7 +29,6 @@ on:
 # - SSH_KEY: SSH key for repository access
 # - GPG_KEY: GPG key for signing commits/tags
 # - GIT_EMAIL: Email for Git commits
-# - NPM_TOKEN: NPM token for publishing
 
 permissions:
   id-token: write
@@ -203,8 +202,6 @@ jobs:
 
       - name: Publish to NPM
         working-directory: packages/${{ inputs.package }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish *.tgz --access public --tag ${{ steps.version.outputs.npm-tag }} --provenance
 
       - name: Generate changelog
