@@ -10,8 +10,8 @@
 		"catalogs": {
 			"base": {
 				"@types/bun": "^1.3.10",
-				"oxfmt": "^0.27.0",
-				"oxlint-tsgolint": "^0.11.3",
+				"oxfmt": "^0.37.0",
+				"oxlint-tsgolint": "^0.16.0",
 				"oxlint": "^1.42.0",
 				"typescript": "^5.9.3"
 			}
