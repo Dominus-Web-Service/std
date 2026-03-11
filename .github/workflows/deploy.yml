@@ -99,7 +99,8 @@ jobs:
         run: bun run build
 
       - name: ${{ matrix.check }}
-        run: bun --filter '${{ inputs.package }}' run ${{ matrix.check }}
+        working-directory: packages/${{ inputs.package }}
+        run: bun run ${{ matrix.check }}
 
   # ─── Release ────────────────────────────────────────
   release:
@@ -117,7 +118,7 @@ jobs:
         uses: ./.github/actions/setup-bun-project
 
       - name: Setup Node (npm publish --provenance)
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "latest"
           registry-url: "https://registry.npmjs.org"
@@ -194,7 +195,7 @@ jobs:
           fi
 
       - name: Build package
-        run: bun --filter '${{ inputs.package }}' run build
+        run: bun run build
 
       - name: Pack package
         working-directory: packages/${{ inputs.package }}
