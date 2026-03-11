@@ -31,8 +31,8 @@ bun install
 
 ```
 packages/
-├── error/               # @dws/error
-├── singleton-manager/   # @dws/singleton-manager
+├── error/               # @dws-std/error
+├── singleton-manager/   # @dws-std/singleton-manager
 └── template/            # Package scaffold template
 ```
 

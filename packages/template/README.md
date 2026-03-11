@@ -18,13 +18,13 @@
 ## 🔧 Installation
 
 ```bash
-bun add @dws/your-package-name
+bun add @dws-std/your-package-name
 ```
 
 ## ⚙️ Usage
 
 ```ts
-import { YourExportedFunction } from '@dws/your-package-name'
+import { YourExportedFunction } from '@dws-std/your-package-name'
 
 // Example usage
 YourExportedFunction()

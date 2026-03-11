@@ -1,4 +1,4 @@
-import { InternalError } from '@dws/error';
+import { InternalError } from '@dws-std/error';
 
 import { SINGLETON_MANAGER_ERROR_KEYS } from './enums/singleton-manager-error-keys';
 

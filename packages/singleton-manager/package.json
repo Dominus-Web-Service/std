@@ -39,7 +39,7 @@
 		"test": "bun test --pass-with-no-tests --coverage"
 	},
 	"dependencies": {
-		"@dws/error": "workspace:*"
+		"@dws-std/error": "workspace:*"
 	},
 	"devDependencies": {
 		"@types/bun": "catalog:base",
@@ -49,6 +49,6 @@
 		"typescript": "catalog:base"
 	},
 	"peerDependencies": {
-		"@dws/error": "workspace:*"
+		"@dws-std/error": "workspace:*"
 	}
 }

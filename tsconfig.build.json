@@ -7,7 +7,7 @@
 		"hideGenerator": true,
 		"customFooterHtml": "<p>Generated with ❤️</p>",
 		"externalSymbolLinkMappings": {
-			"@dws/error": {
+			"@dws-std/error": {
 				"InternalError": "_dws_error..InternalError.html",
 				"AppError": "_dws_error..AppError.html",
 				"HttpError": "_dws_error..HttpError.html"

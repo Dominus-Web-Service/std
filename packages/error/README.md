@@ -29,7 +29,7 @@ while automatically tagging everything with UUID v7 for instant log correlation.
 ## 🔧 Installation
 
 ```bash
-bun add @dws/error
+bun add @dws-std/error
 ```
 
 ## ⚙️ Usage
@@ -39,7 +39,7 @@ bun add @dws/error
 Use this when you want to tell the user _why_ they failed (e.g., 400 Bad Request).
 
 ```ts
-import { HttpError } from '@dws/error';
+import { HttpError } from '@dws-std/error';
 
 throw new HttpError('Invalid email address', 'BAD_REQUEST', { field: 'email' });
 ```
@@ -49,7 +49,7 @@ throw new HttpError('Invalid email address', 'BAD_REQUEST', { field: 'email' });
 Use this to wrap unexpected failures (DB crashes, API timeouts). Log the full `cause` server-side, but only send the `uuid` to the client.
 
 ```ts
-import { InternalError } from '@dws/error';
+import { InternalError } from '@dws-std/error';
 
 try {
 	await db.save(user);

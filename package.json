@@ -20,11 +20,11 @@
 	"type": "module",
 	"scripts": {
 		"clean": "find . -name 'node_modules' -not -path '*/.git/*' -prune -exec rm -rf {} + ; find . -name 'bun.lock' -not -path '*/.git/*' -delete",
-		"build": "bun --filter '!@dws/template' build",
-		"test": "bun --filter '!@dws/template' test",
-		"lint": "bun --filter '!@dws/template' lint",
-		"lint:fix": "bun --filter '!@dws/template' lint:fix",
-		"lint:github": "bun --filter '!@dws/template' lint:github",
+		"build": "bun --filter '!@dws-std/template' build",
+		"test": "bun --filter '!@dws-std/template' test",
+		"lint": "bun --filter '!@dws-std/template' lint",
+		"lint:fix": "bun --filter '!@dws-std/template' lint:fix",
+		"lint:github": "bun --filter '!@dws-std/template' lint:github",
 		"docs": "bunx typedoc --tsconfig tsconfig.build.json"
 	}
 }
