@@ -26,7 +26,7 @@ Instead of implementing the singleton pattern in every class, you register insta
 ## 🔧 Installation
 
 ```bash
-bun add @dws/singleton-manager @dws/error
+bun add @dws-std/singleton-manager @dws-std/error
 ```
 
 ## ⚙️ Usage
@@ -36,7 +36,7 @@ bun add @dws/singleton-manager @dws/error
 Register your instances once at startup. They'll be available everywhere.
 
 ```typescript
-import { SingletonManager } from '@dws/singleton-manager';
+import { SingletonManager } from '@dws-std/singleton-manager';
 
 class DatabaseConnection {
 	private _isConnected = false;
