@@ -116,6 +116,12 @@ jobs:
       - name: Setup Bun Project
         uses: ./.github/actions/setup-bun-project
 
+      - name: Setup Node (npm publish --provenance)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "latest"
+          registry-url: "https://registry.npmjs.org"
+
       - name: Setup Git
         uses: ./.github/actions/setup-git
         with:
@@ -190,11 +196,15 @@ jobs:
       - name: Build package
         run: bun --filter '${{ inputs.package }}' run build
 
+      - name: Pack package
+        working-directory: packages/${{ inputs.package }}
+        run: bun pm pack
+
       - name: Publish to NPM
         working-directory: packages/${{ inputs.package }}
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: bun publish --access public --tag ${{ steps.version.outputs.npm-tag }} --provenance
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish *.tgz --access public --tag ${{ steps.version.outputs.npm-tag }} --provenance
 
       - name: Generate changelog
         id: changelog
