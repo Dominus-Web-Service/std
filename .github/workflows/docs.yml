@@ -23,6 +23,9 @@ jobs:
       - name: Setup Bun Project
         uses: ./.github/actions/setup-bun-project
 
+      - name: Build
+        run: bun run build
+
       - name: Generate Docs
         run: bun run docs
 
