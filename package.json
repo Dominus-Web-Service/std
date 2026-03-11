@@ -19,7 +19,7 @@
 	},
 	"type": "module",
 	"scripts": {
-		"clean": "find . -name 'node_modules' -not -path '*/.git/*' -prune -exec rm -rf {} + ; find . -name 'bun.lock' -not -path '*/.git/*' -delete",
+		"clean": "find . -name 'node_modules' -not -path '*/.git/*' -prune -exec rm -rf {} + ; find . -name 'dist' -not -path '*/.git/*' -prune -exec rm -rf {} + ; find . -name 'bun.lock' -not -path '*/.git/*' -delete",
 		"build": "bun --filter '!@dws-std/template' build",
 		"test": "bun --filter '!@dws-std/template' test",
 		"lint": "bun --filter '!@dws-std/template' lint",
