@@ -21,12 +21,12 @@ Instead of implementing the singleton pattern in every class, you register insta
 
 - 🔒 **Type-Safe**: Full TypeScript support with generics, no `any` casting.
 - 🎯 **Centralized**: One place to manage all your singletons.
-- ⚡ **Lightweight**: Minimal overhead, zero dependencies.
+- ⚡ **Lightweight**: Minimal overhead.
 
 ## 🔧 Installation
 
 ```bash
-bun add @dws-std/singleton-manager @dws-std/error
+bun add @dws-std/singleton-manager
 ```
 
 ## ⚙️ Usage

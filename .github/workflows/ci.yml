@@ -7,8 +7,24 @@ on:
   workflow_dispatch:
 
 jobs:
+  # ─── Build all packages (respects dependency order) ─
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Bun Project
+        uses: ./.github/actions/setup-bun-project
+
+      - name: Build
+        run: bun run build
+
+  # ─── Lint & Test in parallel (after build gate) ─────
   check:
     name: ${{ matrix.name }}
+    needs: build
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
@@ -16,8 +32,6 @@ jobs:
         include:
           - name: Lint
             script: lint:github
-          - name: Build
-            script: build
           - name: Test
             script: test
     steps:
@@ -26,6 +40,9 @@ jobs:
 
       - name: Setup Bun Project
         uses: ./.github/actions/setup-bun-project
+
+      - name: Build
+        run: bun run build
 
       - name: ${{ matrix.name }}
         run: bun run ${{ matrix.script }}

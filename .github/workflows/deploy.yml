@@ -60,15 +60,11 @@ jobs:
           echo "name=$(jq -r .name "$PKG_DIR/package.json")" >> "$GITHUB_OUTPUT"
           echo "version=$(jq -r .version "$PKG_DIR/package.json")" >> "$GITHUB_OUTPUT"
 
-  # ─── CI checks (lint, build, test in parallel) ─────
-  ci:
-    name: CI — ${{ matrix.check }}
+  # ─── Build all packages (dependency order) ──────────
+  build:
+    name: CI — Build
     needs: validate
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
-      matrix:
-        check: [lint, build, test]
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -77,6 +73,30 @@ jobs:
 
       - name: Setup Bun Project
         uses: ./.github/actions/setup-bun-project
+
+      - name: Build
+        run: bun run build
+
+  # ─── Lint & Test in parallel (after build gate) ─────
+  ci:
+    name: CI — ${{ matrix.check }}
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        check: [lint, test]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ssh-key: ${{ secrets.SSH_KEY }}
+
+      - name: Setup Bun Project
+        uses: ./.github/actions/setup-bun-project
+
+      - name: Build
+        run: bun run build
 
       - name: ${{ matrix.check }}
         run: bun --filter '${{ inputs.package }}' run ${{ matrix.check }}
@@ -96,7 +116,7 @@ jobs:
       - name: Setup Bun Project
         uses: ./.github/actions/setup-bun-project
 
-      - name: Setup Node (npm publish)
+      - name: Setup Node (npm publish --provenance)
         uses: actions/setup-node@v4
         with:
           node-version: "latest"
@@ -176,11 +196,15 @@ jobs:
       - name: Build package
         run: bun --filter '${{ inputs.package }}' run build
 
+      - name: Pack package
+        working-directory: packages/${{ inputs.package }}
+        run: bun pm pack
+
       - name: Publish to NPM
         working-directory: packages/${{ inputs.package }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --access public --tag ${{ steps.version.outputs.npm-tag }} --provenance
+        run: npm publish *.tgz --access public --tag ${{ steps.version.outputs.npm-tag }} --provenance
 
       - name: Generate changelog
         id: changelog
