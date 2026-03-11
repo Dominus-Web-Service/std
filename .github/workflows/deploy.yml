@@ -26,7 +26,6 @@ on:
           - alpha
 
 # Required secrets:
-# - SSH_KEY: SSH key for repository access
 # - GPG_KEY: GPG key for signing commits/tags
 # - GIT_EMAIL: Email for Git commits
 
@@ -45,8 +44,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          ssh-key: ${{ secrets.SSH_KEY }}
 
       - name: Check package exists
         id: info
@@ -67,8 +64,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          ssh-key: ${{ secrets.SSH_KEY }}
 
       - name: Setup Bun Project
         uses: ./.github/actions/setup-bun-project
@@ -88,8 +83,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          ssh-key: ${{ secrets.SSH_KEY }}
 
       - name: Setup Bun Project
         uses: ./.github/actions/setup-bun-project
@@ -111,7 +104,6 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-          ssh-key: ${{ secrets.SSH_KEY }}
 
       - name: Setup Bun Project
         uses: ./.github/actions/setup-bun-project
