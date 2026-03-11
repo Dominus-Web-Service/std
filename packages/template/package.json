@@ -12,8 +12,10 @@
 		"url": "https://github.com/Dominus-Web-Service/packages",
 		"directory": "packages/template"
 	},
+	"files": [
+		"dist"
+	],
 	"type": "module",
-	"files": ["dist"],
 	"exports": {
 		".": "./dist/index.js"
 	},
@@ -29,8 +31,8 @@
 	"devDependencies": {
 		"@types/bun": "catalog:base",
 		"oxfmt": "catalog:base",
-		"oxlint-tsgolint": "catalog:base",
 		"oxlint": "catalog:base",
+		"oxlint-tsgolint": "catalog:base",
 		"typescript": "catalog:base"
 	}
 }
