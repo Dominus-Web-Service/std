@@ -1,14 +1,14 @@
 # DWS Packages
 
 Monorepo for **Dominus Web Services** shared TypeScript packages.
-Built with [Bun](https://bun.sh/), published on npm under the `@dws/` scope.
+Built with [Bun](https://bun.sh/), published on npm under the `@dws-std/` scope.
 
 ## Packages
 
 | Package | Description |
 |---------|-------------|
-| [`@dws/error`](packages/error) | Structured error hierarchy with UUID v7 tracking, HTTP status codes, and client/server separation. |
-| [`@dws/singleton-manager`](packages/singleton-manager) | Centralized type-safe registry for managing singleton instances by name. |
+| [`@dws-std/error`](packages/error) | Structured error hierarchy with UUID v7 tracking, HTTP status codes, and client/server separation. |
+| [`@dws-std/singleton-manager`](packages/singleton-manager) | Centralized type-safe registry for managing singleton instances by name. |
 
 ## Getting Started
 
