@@ -79,7 +79,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        check: [lint, test]
+        check: [lint:github, test]
     steps:
       - name: Checkout
         uses: actions/checkout@v6
