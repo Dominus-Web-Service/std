@@ -30,6 +30,8 @@ One registry, no duplication.
 bun add @dws-std/registry
 ```
 
+> **Peer dependency:** `@dws-std/error` must be installed alongside.
+
 ## ⚙️ Usage
 
 ### Registering instances
