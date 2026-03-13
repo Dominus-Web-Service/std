@@ -234,17 +234,17 @@ jobs:
                     done <<< "$COMMITS"
 
                     {
-                      [ -n "$FEAT" ]     && printf "### 🚀 Features\n%b\n\n" "$FEAT"
-                      [ -n "$FIX" ]      && printf "### 🐛 Bug Fixes\n%b\n\n" "$FIX"
-                      [ -n "$PERF" ]     && printf "### ⚡ Performance\n%b\n\n" "$PERF"
-                      [ -n "$REFACTOR" ] && printf "### ♻️ Refactors\n%b\n\n" "$REFACTOR"
-                      [ -n "$DOCS" ]     && printf "### 📚 Documentation\n%b\n\n" "$DOCS"
-                      [ -n "$TEST" ]     && printf "### 🧪 Tests\n%b\n\n" "$TEST"
-                      [ -n "$BUILD" ]    && printf "### 🏗️ Build\n%b\n\n" "$BUILD"
-                      [ -n "$STYLE" ]    && printf "### 🎨 Style\n%b\n\n" "$STYLE"
-                      [ -n "$CI" ]       && printf "### 🔧 CI\n%b\n\n" "$CI"
-                      [ -n "$CHORE" ]    && printf "### 🧹 Chores\n%b\n\n" "$CHORE"
-                      [ -n "$OTHER" ]    && printf "### 📝 Other\n%b\n\n" "$OTHER"
+                      [ -n "$FEAT" ]     && printf "### 🚀 Features\n%b\n\n" "$FEAT"     || true
+                      [ -n "$FIX" ]      && printf "### 🐛 Bug Fixes\n%b\n\n" "$FIX"      || true
+                      [ -n "$PERF" ]     && printf "### ⚡ Performance\n%b\n\n" "$PERF"   || true
+                      [ -n "$REFACTOR" ] && printf "### ♻️ Refactors\n%b\n\n" "$REFACTOR" || true
+                      [ -n "$DOCS" ]     && printf "### 📚 Documentation\n%b\n\n" "$DOCS" || true
+                      [ -n "$TEST" ]     && printf "### 🧪 Tests\n%b\n\n" "$TEST"         || true
+                      [ -n "$BUILD" ]    && printf "### 🏗️ Build\n%b\n\n" "$BUILD"        || true
+                      [ -n "$STYLE" ]    && printf "### 🎨 Style\n%b\n\n" "$STYLE"        || true
+                      [ -n "$CI" ]       && printf "### 🔧 CI\n%b\n\n" "$CI"              || true
+                      [ -n "$CHORE" ]    && printf "### 🧹 Chores\n%b\n\n" "$CHORE"       || true
+                      [ -n "$OTHER" ]    && printf "### 📝 Other\n%b\n\n" "$OTHER"        || true
                     } > /tmp/changelog.md
                   fi
 
