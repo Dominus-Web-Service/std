@@ -1,19 +1,19 @@
 {
-	"name": "@dws-std/error",
+	"name": "@dws-std/registry",
 	"version": "1.0.0",
-	"description": "Structured TypeScript exceptions with UUID v7 tracking, HTTP status codes, and automatic timestamps.",
+	"description": "Centralized, type-safe registry for managing named instances.",
 	"keywords": [
 		"bun",
 		"dws",
-		"dws-error",
-		"error"
+		"registry",
+		"type-safe"
 	],
 	"license": "MIT",
 	"author": "Dominus Web Services (DWS)",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Dominus-Web-Service/packages",
-		"directory": "packages/error"
+		"directory": "packages/registry"
 	},
 	"files": [
 		"dist"
@@ -35,11 +35,17 @@
 		"lint": "oxlint --type-aware --type-check ./src",
 		"test": "bun test --pass-with-no-tests --coverage"
 	},
+	"dependencies": {
+		"@dws-std/error": "workspace:^"
+	},
 	"devDependencies": {
 		"@types/bun": "catalog:base",
 		"oxfmt": "catalog:base",
 		"oxlint": "catalog:base",
 		"oxlint-tsgolint": "catalog:base",
 		"typescript": "catalog:base"
+	},
+	"peerDependencies": {
+		"@dws-std/error": "workspace:^"
 	}
 }

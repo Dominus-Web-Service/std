@@ -1,19 +1,6 @@
 # 📦 Package Template
 
-## 📌 Table of Contents
-
-- [📦 Package Template](#-package-template)
-	- [📌 Table of Contents](#-table-of-contents)
-	- [📝 Description](#-description)
-	- [🔧 Installation](#-installation)
-	- [⚙️ Usage](#-usage)
-	- [📚 API Reference](#-api-reference)
-	- [⚖️ License](#-license)
-	- [📧 Contact](#-contact)
-
-## 📝 Description
-
-**Package Template** provides a starting point for building and publishing npm packages. Customize this section with a description of your package's purpose and features.
+Scaffold for new `@dws-std/` packages. Copy this directory and fill in the blanks.
 
 ## 🔧 Installation
 
@@ -24,10 +11,7 @@ bun add @dws-std/your-package-name
 ## ⚙️ Usage
 
 ```ts
-import { YourExportedFunction } from '@dws-std/your-package-name'
-
-// Example usage
-YourExportedFunction()
+import { YourExport } from '@dws-std/your-package-name';
 ```
 
 ## 📚 API Reference
@@ -36,7 +20,7 @@ Full docs: [Dominus-Web-Service.github.io/packages](https://Dominus-Web-Service.
 
 ## ⚖️ License
 
-Distributed under the MIT License. See [LICENSE](./LICENSE) for more information.
+MIT - [LICENSE](./LICENSE)
 
 ## 📧 Contact
 

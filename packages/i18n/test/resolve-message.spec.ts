@@ -1,0 +1,109 @@
+import { describe, expect, test } from 'bun:test';
+
+import { resolveMessage } from '#/resolve-message';
+import type { ResolvedMessage } from '#/message/type/resolved-message';
+import { LocalizedHttpException } from '#/exception/localized-http-exception';
+
+const _makeMessage = (overrides: Partial<ResolvedMessage> = {}): ResolvedMessage => ({
+	translations: { en: 'Hello', fr: 'Bonjour' },
+	defaultLocale: 'en',
+	...overrides
+});
+
+describe.concurrent('resolveMessage', (): void => {
+	test('should return the default locale translation when no locale is specified', (): void => {
+		const msg = _makeMessage();
+
+		expect(resolveMessage(msg)).toBe('Hello');
+	});
+
+	test('should return the requested locale translation', (): void => {
+		const msg = _makeMessage();
+
+		expect(resolveMessage(msg, 'fr')).toBe('Bonjour');
+	});
+
+	test('should return an empty string when the requested locale does not exist', (): void => {
+		const msg = _makeMessage();
+
+		expect(resolveMessage(msg, 'ja')).toBe('');
+	});
+
+	test('should interpolate a single parameter', (): void => {
+		const msg = _makeMessage({
+			translations: { en: 'Hello, {{name}}!' },
+			params: { name: 'Alice' }
+		});
+
+		expect(resolveMessage(msg)).toBe('Hello, Alice!');
+	});
+
+	test('should interpolate multiple parameters', (): void => {
+		const msg = _makeMessage({
+			translations: { en: 'TTL must be between {{min}} and {{max}}' },
+			params: { min: '60', max: '86400' }
+		});
+
+		expect(resolveMessage(msg)).toBe('TTL must be between 60 and 86400');
+	});
+
+	test('should keep placeholder when param is missing from the record', (): void => {
+		const msg = _makeMessage({
+			translations: { en: 'Hello, {{name}}!' },
+			params: {}
+		});
+
+		expect(resolveMessage(msg)).toBe('Hello, {{name}}!');
+	});
+
+	test('should interpolate params in the requested locale', (): void => {
+		const msg = _makeMessage({
+			translations: {
+				en: 'Zone "{{zone}}" created',
+				fr: 'Zone "{{zone}}" créée'
+			},
+			params: { zone: 'example.com' }
+		});
+
+		expect(resolveMessage(msg, 'fr')).toBe('Zone "example.com" créée');
+	});
+
+	test('should not interpolate when params is undefined', (): void => {
+		const msg = _makeMessage({
+			translations: { en: 'No params {{here}}' },
+			params: undefined
+		});
+
+		expect(resolveMessage(msg)).toBe('No params {{here}}');
+	});
+
+	test('should work with a LocalizedHttpException target', (): void => {
+		const exception = new LocalizedHttpException('test.code', {
+			status: 'BAD_REQUEST',
+			translations: { en: 'Bad input: {{field}}', fr: 'Entrée invalide : {{field}}' },
+			params: { field: 'email' },
+			defaultLocale: 'en'
+		});
+
+		expect(resolveMessage(exception)).toBe('Bad input: email');
+		expect(resolveMessage(exception, 'fr')).toBe('Entrée invalide : email');
+	});
+
+	test('should handle templates with adjacent placeholders', (): void => {
+		const msg = _makeMessage({
+			translations: { en: '{{a}}{{b}}' },
+			params: { a: 'X', b: 'Y' }
+		});
+
+		expect(resolveMessage(msg)).toBe('XY');
+	});
+
+	test('should ignore malformed placeholders', (): void => {
+		const msg = _makeMessage({
+			translations: { en: 'Hello {name} and {{ spaced }}' },
+			params: { name: 'Alice', ' spaced ': 'nope' }
+		});
+
+		expect(resolveMessage(msg)).toBe('Hello {name} and {{ spaced }}');
+	});
+});
