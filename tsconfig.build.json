@@ -1,16 +1,14 @@
 {
 	"typedocOptions": {
 		"entryPointStrategy": "packages",
-		"entryPoints": ["packages/error", "packages/singleton-manager"],
+		"entryPoints": ["packages/error", "packages/registry", "packages/i18n"],
 		"out": "docs",
 		"name": "DWS Packages",
 		"hideGenerator": true,
 		"customFooterHtml": "<p>Generated with ❤️</p>",
 		"externalSymbolLinkMappings": {
 			"@dws-std/error": {
-				"InternalError": "_dws_error..InternalError.html",
-				"AppError": "_dws_error..AppError.html",
-				"HttpError": "_dws_error..HttpError.html"
+				"Exception": "_dws_error..Exception.html"
 			}
 		},
 		"packageOptions": {

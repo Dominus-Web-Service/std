@@ -1,14 +1,15 @@
-# DWS Packages
+# DWS Standard Library
 
-Monorepo for **Dominus Web Services** shared TypeScript packages.
-Built with [Bun](https://bun.sh/), published on npm under the `@dws-std/` scope.
+The shared TypeScript toolkit behind **Dominus Web Services**.
+Everything lives in this monorepo, is built with [Bun](https://bun.sh/), and published on npm under the `@dws-std/` scope.
 
 ## Packages
 
-| Package | Description |
-|---------|-------------|
-| [`@dws-std/error`](packages/error) | Structured error hierarchy with UUID v7 tracking, HTTP status codes, and client/server separation. |
-| [`@dws-std/singleton-manager`](packages/singleton-manager) | Centralized type-safe registry for managing singleton instances by name. |
+| Package                                  | What it does                                                                                    |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| [`@dws-std/error`](packages/error)       | Structured exceptions with UUID v7 tracking and HTTP status codes.                              |
+| [`@dws-std/i18n`](packages/i18n)         | Type-safe internationalization — localized messages and exceptions with template interpolation. |
+| [`@dws-std/registry`](packages/registry) | A centralized, type-safe registry for managing named instances.                                 |
 
 ## Getting Started
 
@@ -18,22 +19,23 @@ bun install
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `bun run build` | Build all packages |
-| `bun run test` | Run all test suites |
-| `bun run lint` | Lint all packages |
-| `bun run lint:fix` | Lint and auto-fix |
-| `bun run docs` | Generate TypeDoc documentation |
-| `bun run clean` | Remove all `node_modules` and `bun.lock` files |
+| Command            | What it does                                |
+| ------------------ | ------------------------------------------- |
+| `bun run build`    | Build all packages                          |
+| `bun run test`     | Run every test suite                        |
+| `bun run lint`     | Lint all packages                           |
+| `bun run lint:fix` | Lint and auto-fix                           |
+| `bun run docs`     | Generate TypeDoc documentation              |
+| `bun run clean`    | Wipe `node_modules`, `dist`, and lock files |
 
 ## Project Structure
 
 ```
 packages/
 ├── error/               # @dws-std/error
-├── singleton-manager/   # @dws-std/singleton-manager
-└── template/            # Package scaffold template
+├── i18n/                # @dws-std/i18n
+├── registry/            # @dws-std/registry
+└── template/            # Scaffold for new packages
 ```
 
 ## Documentation
@@ -42,4 +44,4 @@ packages/
 
 ## License
 
-MIT — [Dominus Web Services (DWS)](https://github.com/Dominus-Web-Service)
+MIT - [Dominus Web Services (DWS)](https://github.com/Dominus-Web-Service)
