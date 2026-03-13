@@ -1,12 +1,11 @@
 {
-	"name": "@dws-std/singleton-manager",
+	"name": "@dws-std/registry",
 	"version": "1.0.0",
-	"description": "Singleton Manager is a package that provides a simple way to manage singletons in your application. It allows you to create, retrieve, and manage singletons with ease and type safety.",
+	"description": "Centralized, type-safe registry for managing named instances.",
 	"keywords": [
 		"bun",
 		"dws",
-		"singleton",
-		"singleton-manager",
+		"registry",
 		"type-safe"
 	],
 	"license": "MIT",
@@ -14,17 +13,13 @@
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Dominus-Web-Service/packages",
-		"directory": "packages/singleton-manager"
+		"directory": "packages/registry"
 	},
 	"files": [
 		"dist"
 	],
 	"type": "module",
 	"exports": {
-		"./enums": {
-			"types": "./dist/enums/index.d.ts",
-			"default": "./dist/enums/index.js"
-		},
 		".": {
 			"types": "./dist/index.d.ts",
 			"default": "./dist/index.js"
@@ -49,5 +44,8 @@
 		"oxlint": "catalog:base",
 		"oxlint-tsgolint": "catalog:base",
 		"typescript": "catalog:base"
+	},
+	"peerDependencies": {
+		"@dws-std/error": "workspace:^"
 	}
 }
