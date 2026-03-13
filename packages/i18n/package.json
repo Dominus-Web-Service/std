@@ -17,7 +17,7 @@
 	"author": "Dominus Web Services (DWS)",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Dominus-Web-Service/packages",
+		"url": "https://github.com/Dominus-Web-Service/std",
 		"directory": "packages/i18n"
 	},
 	"files": [
