@@ -1,14 +1,21 @@
 # 🐞 DWS Error
 
-Handling errors in TypeScript is usually a mess of `Error` objects without context.  
-DWS Error standardizes how errors are tracked and exposed in APIs, ensuring every crash is traceable and safe for production.
+If you've ever debugged a production incident with nothing but a generic `Error("something went wrong")`,
+you know the pain.  
+This package gives your errors structure, every exception carries a UUID v7, a timestamp, and an optional HTTP status code,
+so you can always trace what happened and when.
 
 ## Why this package?
 
-The goal is simple: **Stop exposing server internals to clients.**
+Vanilla `Error` objects lack context.  
+You end up manually adding IDs, timestamps, and status codes everywhere, or worse, you don't, and debugging becomes a guessing game.
 
-This package forces a clear distinction between what the user sees (`HttpError`) and what your logs see (`InternalError`),
-while automatically tagging everything with UUID v7 for instant log correlation.
+`@dws-std/error` solves that with two classes:
+
+- **`Exception`** - a richer base error with automatic UUID v7 tracking, timestamps, and an optional error code.
+- **`HttpException`** - extends `Exception` with an HTTP status code, perfect for API error responses.
+
+No dependencies, no bloat. Just structured errors that make your life easier.
 
 ## 📌 Table of Contents
 
@@ -21,10 +28,10 @@ while automatically tagging everything with UUID v7 for instant log correlation.
 
 ## ✨ Features
 
-- 🔍 **UUID v7 Tracking**: Every error gets a unique, time-sortable ID automatically.
-- 🔒 **Security-First**: Native separation between client-safe messages and sensitive internal logs.
-- 📅 **Built-in Context**: Timestamps and HTTP status codes are part of the instance.
-- 📦 **Zero Dependencies**: Pure TypeScript, tiny footprint.
+- 🔍 **UUID v7 Tracking** : Every exception gets a unique, time-sortable ID out of the box.
+- 📅 **Built-in Context** : Timestamp, error code, and cause are baked into each instance.
+- 🌐 **HTTP-Aware** : `HttpException` maps to any standard HTTP status for clean API responses.
+- 📦 **Zero Dependencies** : Pure TypeScript, tiny footprint.
 
 ## 🔧 Installation
 
@@ -34,29 +41,52 @@ bun add @dws-std/error
 
 ## ⚙️ Usage
 
-### HttpError - Client-Facing Errors
+### Exception - General-Purpose Errors
 
-Use this when you want to tell the user _why_ they failed (e.g., 400 Bad Request).
+Use `Exception` whenever you need a traceable error with more context than a plain `Error`.
 
 ```ts
-import { HttpError } from '@dws-std/error';
+import { Exception } from '@dws-std/error';
 
-throw new HttpError('Invalid email address', 'BAD_REQUEST', { field: 'email' });
+throw new Exception('Configuration file not found', {
+	code: 'CONFIG_NOT_FOUND'
+});
 ```
 
-### InternalError - Server-Side Errors
+Every instance automatically carries a `uuid` and a `date`, so you can correlate it in your logs without any extra work.
 
-Use this to wrap unexpected failures (DB crashes, API timeouts). Log the full `cause` server-side, but only send the `uuid` to the client.
+You can also wrap a root cause to preserve the original error:
 
 ```ts
-import { InternalError } from '@dws-std/error';
+import { Exception } from '@dws-std/error';
 
 try {
 	await db.save(user);
 } catch (err) {
-	// The original 'err' is hidden from the client but kept in 'cause'
-	throw new InternalError('Failed to persist user', err);
+	throw new Exception('Failed to persist user', { cause: err });
 }
+```
+
+### HttpException - API Errors
+
+When you're building an API and need an error tied to an HTTP status code, reach for `HttpException`.  
+Pass a status key like `'BAD_REQUEST'` or a numeric code like `400`, both work.
+
+```ts
+import { HttpException } from '@dws-std/error';
+
+throw new HttpException('Invalid email address', {
+	status: 'BAD_REQUEST',
+	code: 'INVALID_EMAIL'
+});
+```
+
+If you don't specify a status, it defaults to `500 Internal Server Error`, so unexpected failures are covered too:
+
+```ts
+import { HttpException } from '@dws-std/error';
+
+throw new HttpException('Something broke');
 ```
 
 ## 📚 API Reference

@@ -1,3 +1,9 @@
+/**
+ * Standard HTTP status codes mapped by name.
+ *
+ * Use the key (e.g. `NOT_FOUND`) or the numeric value (e.g. `404`) anywhere
+ * an HTTP status is expected.
+ */
 export const HTTP_STATUS_CODES = {
 	// 1xx Informational Status Codes
 	CONTINUE: 100,
@@ -72,3 +78,9 @@ export const HTTP_STATUS_CODES = {
 	NOT_EXTENDED: 510,
 	NETWORK_AUTHENTICATION_REQUIRED: 511
 } as const;
+
+/** One of the uppercase key names in {@link HTTP_STATUS_CODES} (e.g. `'NOT_FOUND'`). */
+export type HttpStatusKey = keyof typeof HTTP_STATUS_CODES;
+
+/** One of the numeric values in {@link HTTP_STATUS_CODES} (e.g. `404`). */
+export type HttpStatusCode = (typeof HTTP_STATUS_CODES)[HttpStatusKey];

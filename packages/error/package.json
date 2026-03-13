@@ -1,7 +1,7 @@
 {
 	"name": "@dws-std/error",
 	"version": "1.0.0",
-	"description": "A collection of error classes for Dominus Web Services (DWS) projects.",
+	"description": "Structured TypeScript exceptions with UUID v7 tracking, HTTP status codes, and automatic timestamps.",
 	"keywords": [
 		"bun",
 		"dws",
@@ -20,10 +20,6 @@
 	],
 	"type": "module",
 	"exports": {
-		"./enums": {
-			"types": "./dist/enums/index.d.ts",
-			"default": "./dist/enums/index.js"
-		},
 		".": {
 			"types": "./dist/index.d.ts",
 			"default": "./dist/index.js"
