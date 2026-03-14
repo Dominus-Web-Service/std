@@ -28,6 +28,7 @@ on:
 # Required secrets:
 # - GPG_KEY: GPG key for signing commits/tags
 # - GIT_EMAIL: Email for Git commits
+# - SSH_PRIVATE_KEY: Private SSH key for pushing to repo
 
 permissions:
     id-token: write
@@ -104,6 +105,7 @@ jobs:
               uses: actions/checkout@v6
               with:
                   fetch-depth: 0
+                  ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
             - name: Setup Bun Project
               uses: ./.github/actions/setup-bun-project
