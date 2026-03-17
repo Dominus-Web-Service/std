@@ -35,7 +35,7 @@ describe.concurrent('Registry', () => {
 				expect.unreachable('Should have thrown');
 			} catch (error) {
 				expect(error).toBeInstanceOf(Exception);
-				expect((error as Exception).code).toBe(
+				expect((error as Exception).key).toBe(
 					REGISTRY_ERROR_KEYS.CLASS_INSTANCE_ALREADY_REGISTERED
 				);
 			}
@@ -47,7 +47,7 @@ describe.concurrent('Registry', () => {
 				expect.unreachable('Should have thrown');
 			} catch (error) {
 				expect(error).toBeInstanceOf(Exception);
-				expect((error as Exception).code).toBe(
+				expect((error as Exception).key).toBe(
 					REGISTRY_ERROR_KEYS.CLASS_INSTANCE_NOT_REGISTERED
 				);
 			}
@@ -79,7 +79,7 @@ describe.concurrent('Registry', () => {
 				expect.unreachable('Should have thrown');
 			} catch (error) {
 				expect(error).toBeInstanceOf(Exception);
-				expect((error as Exception).code).toBe(
+				expect((error as Exception).key).toBe(
 					REGISTRY_ERROR_KEYS.CLASS_INSTANCE_NOT_REGISTERED
 				);
 			}
