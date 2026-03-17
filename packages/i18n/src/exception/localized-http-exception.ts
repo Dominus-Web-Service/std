@@ -42,10 +42,10 @@ export class LocalizedHttpException<const TCause = unknown> extends HttpExceptio
 	/**
 	 * Creates a new localized HTTP exception.
 	 *
-	 * @param code - Application-specific error code (e.g. `'dns.invalidRecordType'`).
+	 * @param key - Application-specific error key (e.g. `'dns.invalidRecordType'`).
 	 * @param init - Translations, params, status, and cause.
 	 */
-	public constructor(code: string, init: LocalizedHttpExceptionOptions<TCause>) {
+	public constructor(key: string, init: LocalizedHttpExceptionOptions<TCause>) {
 		super(
 			resolveMessage({
 				translations: init.translations,
@@ -55,7 +55,7 @@ export class LocalizedHttpException<const TCause = unknown> extends HttpExceptio
 			{
 				cause: init.cause,
 				status: init.status,
-				code
+				key
 			}
 		);
 		this.translations = init.translations;
