@@ -17,14 +17,14 @@ describe.concurrent('LocalizedHttpException', (): void => {
 		expect(error).toBeInstanceOf(Error);
 	});
 
-	test('should set code from the first constructor argument', (): void => {
+	test('should set key from the first constructor argument', (): void => {
 		const error = new LocalizedHttpException('auth.invalidCredentials', {
 			status: 'UNAUTHORIZED',
 			translations: { en: 'Unauthorized' },
 			defaultLocale: 'en'
 		});
 
-		expect(error.code).toBe('auth.invalidCredentials');
+		expect(error.key).toBe('auth.invalidCredentials');
 	});
 
 	test('should resolve message from the default locale on construction', (): void => {
