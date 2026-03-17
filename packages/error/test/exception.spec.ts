@@ -29,23 +29,23 @@ describe.concurrent('Exception', (): void => {
 		expect(error.cause).toBeUndefined();
 	});
 
-	test('should store code from init', (): void => {
-		const error = new Exception('not allowed', { code: 'AUTH_DENIED' });
+	test('should store key from init', (): void => {
+		const error = new Exception('not allowed', { key: 'AUTH_DENIED' });
 
-		expect(error.code).toBe('AUTH_DENIED');
+		expect(error.key).toBe('AUTH_DENIED');
 	});
 
-	test('should have undefined code when not provided', (): void => {
-		const error = new Exception('no code');
+	test('should have undefined key when not provided', (): void => {
+		const error = new Exception('no key');
 
-		expect(error.code).toBeUndefined();
+		expect(error.key).toBeUndefined();
 	});
 
-	test('should accept both code and cause together', (): void => {
+	test('should accept both key and cause together', (): void => {
 		const cause = new Error('root');
-		const error = new Exception('combined', { code: 'WRAPPED', cause });
+		const error = new Exception('combined', { key: 'WRAPPED', cause });
 
-		expect(error.code).toBe('WRAPPED');
+		expect(error.key).toBe('WRAPPED');
 		expect(error.cause).toBe(cause);
 	});
 

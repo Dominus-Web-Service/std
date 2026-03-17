@@ -34,16 +34,16 @@ describe.concurrent('HttpException', (): void => {
 		expect(error.httpStatusCode).toBe(401);
 	});
 
-	test('should accept status, code, and cause together', (): void => {
+	test('should accept status, key, and cause together', (): void => {
 		const cause = { field: 'email' };
 		const error = new HttpException('validation failed', {
 			status: 'BAD_REQUEST',
-			code: 'VALIDATION_ERROR',
+			key: 'VALIDATION_ERROR',
 			cause
 		});
 
 		expect(error.httpStatusCode).toBe(400);
-		expect(error.code).toBe('VALIDATION_ERROR');
+		expect(error.key).toBe('VALIDATION_ERROR');
 		expect(error.cause).toBe(cause);
 		expect(error.message).toBe('validation failed');
 	});

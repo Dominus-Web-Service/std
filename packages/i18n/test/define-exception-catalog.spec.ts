@@ -40,7 +40,7 @@ describe.concurrent('defineExceptionCatalog', (): void => {
 		expect(error.httpStatusCode).toBe(404);
 	});
 
-	test('should set code to namespace.key', (): void => {
+	test('should set key to namespace.key', (): void => {
 		const catalog = defineExceptionCatalog({
 			namespace: 'test',
 			defaultLocale: 'en',
@@ -52,7 +52,7 @@ describe.concurrent('defineExceptionCatalog', (): void => {
 			}
 		});
 
-		expect(catalog.simple().code).toBe('test.simple');
+		expect(catalog.simple().key).toBe('test.simple');
 	});
 
 	test('should interpolate params into the exception message', (): void => {
@@ -177,7 +177,7 @@ describe.concurrent('defineExceptionCatalog', (): void => {
 			}
 		});
 
-		expect(authCatalog.denied().code).toBe('auth.denied');
-		expect(dnsCatalog.denied().code).toBe('dns.denied');
+		expect(authCatalog.denied().key).toBe('auth.denied');
+		expect(dnsCatalog.denied().key).toBe('dns.denied');
 	});
 });

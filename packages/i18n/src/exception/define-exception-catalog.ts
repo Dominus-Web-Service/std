@@ -17,7 +17,7 @@ export type ExceptionCatalog<TDefs extends Record<string, ExceptionEntry<any>>> 
  */
 // oxlint-disable-next-line no-explicit-any
 export interface DefineExceptionCatalogOptions<TDefs extends Record<string, ExceptionEntry<any>>> {
-	/** Prefix prepended to every error code (e.g. `'dns'` → `'dns.invalidRecordType'`). */
+	/** Prefix prepended to every error key (e.g. `'dns'` → `'dns.invalidRecordType'`). */
 	readonly namespace: string;
 
 	/** Locale used to build the default `message` when no locale is specified. */
@@ -32,7 +32,7 @@ export interface DefineExceptionCatalogOptions<TDefs extends Record<string, Exce
  *
  * Each key in `definitions` becomes a factory function that creates
  * a {@link LocalizedHttpException} pre-filled with the right translations,
- * HTTP status, and error code (`namespace.key`).
+ * HTTP status, and error key (`namespace.key`).
  *
  * @param options - Namespace, default locale, and exception definitions.
  *

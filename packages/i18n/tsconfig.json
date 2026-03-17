@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"types": ["@types/bun"],
 		// ———————————— Type Checking ———————————— //
 		"strict": true,
 		"allowUnreachableCode": false,
@@ -24,7 +25,7 @@
 		"noUncheckedSideEffectImports": true,
 		"paths": {
 			"#/*": ["./src/*"],
-			"#/root/*": ["./*"],
+			"#/root/*": ["./*"]
 		},
 		"resolveJsonModule": true,
 		// —————————————— Emit —————————————— //
