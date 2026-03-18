@@ -8,7 +8,7 @@
 		"customFooterHtml": "<p>Generated with ❤️</p>",
 		"externalSymbolLinkMappings": {
 			"@dws-std/error": {
-				"Exception": "_dws-std_error.Exception.html"
+				"Exception": "https://dominus-web-service.github.io/std/classes/_dws-std_error.Exception.html"
 			}
 		},
 		"packageOptions": {
