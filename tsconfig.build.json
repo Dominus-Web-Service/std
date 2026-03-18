@@ -8,7 +8,7 @@
 		"customFooterHtml": "<p>Generated with ❤️</p>",
 		"externalSymbolLinkMappings": {
 			"@dws-std/error": {
-				"Exception": "_dws_error..Exception.html"
+				"Exception": "_dws_error.Exception.html"
 			}
 		},
 		"packageOptions": {
