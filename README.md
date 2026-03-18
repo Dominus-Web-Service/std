@@ -7,6 +7,7 @@ Everything lives in this monorepo, is built with [Bun](https://bun.sh/), and pub
 
 | Package                                  | What it does                                                                                    |
 | ---------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| [`@dws-std/common`](packages/common)     | Common utilities and types for Dominus Web Services (DWS) projects.                             |
 | [`@dws-std/error`](packages/error)       | Structured exceptions with UUID v7 tracking and HTTP status codes.                              |
 | [`@dws-std/i18n`](packages/i18n)         | Type-safe internationalization — localized messages and exceptions with template interpolation. |
 | [`@dws-std/registry`](packages/registry) | A centralized, type-safe registry for managing named instances.                                 |
@@ -32,6 +33,7 @@ bun install
 
 ```
 packages/
+├── common/              # @dws-std/common
 ├── error/               # @dws-std/error
 ├── i18n/                # @dws-std/i18n
 ├── registry/            # @dws-std/registry
