@@ -5,9 +5,26 @@
     "": {
       "name": "dws-packages",
     },
+    "packages/common": {
+      "name": "@dws-std/common",
+      "version": "2.1.0",
+      "dependencies": {
+        "@dws-std/error": "workspace:^",
+      },
+      "devDependencies": {
+        "@types/bun": "catalog:base",
+        "oxfmt": "catalog:base",
+        "oxlint": "catalog:base",
+        "oxlint-tsgolint": "catalog:base",
+        "typescript": "catalog:base",
+      },
+      "peerDependencies": {
+        "@dws-std/error": "workspace:^",
+      },
+    },
     "packages/error": {
       "name": "@dws-std/error",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "devDependencies": {
         "@types/bun": "catalog:base",
         "oxfmt": "catalog:base",
@@ -18,7 +35,7 @@
     },
     "packages/i18n": {
       "name": "@dws-std/i18n",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "dependencies": {
         "@dws-std/error": "workspace:^",
       },
@@ -35,7 +52,7 @@
     },
     "packages/registry": {
       "name": "@dws-std/registry",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "dependencies": {
         "@dws-std/error": "workspace:^",
       },
@@ -72,6 +89,8 @@
     },
   },
   "packages": {
+    "@dws-std/common": ["@dws-std/common@workspace:packages/common"],
+
     "@dws-std/error": ["@dws-std/error@workspace:packages/error"],
 
     "@dws-std/i18n": ["@dws-std/i18n@workspace:packages/i18n"],
