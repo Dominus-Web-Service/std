@@ -55,7 +55,7 @@ describe.concurrent('defineExceptionCatalog', (): void => {
 		expect(catalog.simple().key).toBe('test.simple');
 	});
 
-	test('should interpolate params into the exception message', (): void => {
+	test('should not interpolate params in the exception message', (): void => {
 		const catalog = defineExceptionCatalog({
 			namespace: 'test',
 			defaultLocale: 'en',
@@ -67,10 +67,10 @@ describe.concurrent('defineExceptionCatalog', (): void => {
 			}
 		});
 
-		expect(catalog.withParams({ id: '42' }).message).toBe('Invalid id: 42');
+		expect(catalog.withParams({ id: '42' }).message).toBe('Invalid id: {{id}}');
 	});
 
-	test('should interpolate multiple params', (): void => {
+	test('should not interpolate multiple params in the exception message', (): void => {
 		const catalog = defineExceptionCatalog({
 			namespace: 'test',
 			defaultLocale: 'en',
@@ -83,7 +83,7 @@ describe.concurrent('defineExceptionCatalog', (): void => {
 		});
 
 		expect(catalog.range({ min: '1', max: '100' }).message).toBe(
-			'Value must be between 1 and 100'
+			'Value must be between {{min}} and {{max}}'
 		);
 	});
 

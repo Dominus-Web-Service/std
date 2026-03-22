@@ -1,6 +1,5 @@
 import { HttpException, type HttpExceptionOptions } from '@dws-std/error';
 
-import { resolveMessage } from '../resolve-message';
 import type { Translations } from '../type/translations';
 
 /**
@@ -24,8 +23,8 @@ export interface LocalizedHttpExceptionOptions<
 /**
  * HTTP exception that carries translated messages.
  *
- * The `message` property is automatically resolved to the default locale.
- * Use {@link resolveMessage} to get a translation in a different locale.
+ * The `message` property contains the raw template for the default locale.
+ * Use {@link resolveMessage} to get the interpolated string for any locale.
  *
  * @template TCause - Type of the underlying cause.
  */
@@ -46,18 +45,11 @@ export class LocalizedHttpException<const TCause = unknown> extends HttpExceptio
 	 * @param init - Translations, params, status, and cause.
 	 */
 	public constructor(key: string, init: LocalizedHttpExceptionOptions<TCause>) {
-		super(
-			resolveMessage({
-				translations: init.translations,
-				params: init.params,
-				defaultLocale: init.defaultLocale
-			}),
-			{
-				cause: init.cause,
-				status: init.status,
-				key
-			}
-		);
+		super(init.translations[init.defaultLocale] ?? '', {
+			cause: init.cause,
+			status: init.status,
+			key
+		});
 		this.translations = init.translations;
 		this.params = init.params;
 		this.defaultLocale = init.defaultLocale;

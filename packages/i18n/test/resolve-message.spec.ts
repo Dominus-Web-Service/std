@@ -1,10 +1,10 @@
 import { describe, expect, test } from 'bun:test';
 
 import { resolveMessage } from '#/resolve-message';
-import type { ResolvedMessage } from '#/message/type/resolved-message';
+import type { LocalizedMessage } from '#/message/type/localized-message';
 import { LocalizedHttpException } from '#/exception/localized-http-exception';
 
-const _makeMessage = (overrides: Partial<ResolvedMessage> = {}): ResolvedMessage => ({
+const _makeMessage = (overrides: Partial<LocalizedMessage> = {}): LocalizedMessage => ({
 	translations: { en: 'Hello', fr: 'Bonjour' },
 	defaultLocale: 'en',
 	...overrides
