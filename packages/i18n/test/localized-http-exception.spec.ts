@@ -27,7 +27,7 @@ describe.concurrent('LocalizedHttpException', (): void => {
 		expect(error.key).toBe('auth.invalidCredentials');
 	});
 
-	test('should resolve message from the default locale on construction', (): void => {
+	test('should set message to the raw default locale template', (): void => {
 		const error = new LocalizedHttpException('ns.key', {
 			status: 'BAD_REQUEST',
 			translations: { en: 'Bad request', fr: 'Requête invalide' },
@@ -37,7 +37,7 @@ describe.concurrent('LocalizedHttpException', (): void => {
 		expect(error.message).toBe('Requête invalide');
 	});
 
-	test('should interpolate params into the message on construction', (): void => {
+	test('should not interpolate params into the message', (): void => {
 		const error = new LocalizedHttpException('dns.invalid', {
 			status: 'BAD_REQUEST',
 			translations: { en: 'Invalid type: {{type}}' },
@@ -45,7 +45,7 @@ describe.concurrent('LocalizedHttpException', (): void => {
 			defaultLocale: 'en'
 		});
 
-		expect(error.message).toBe('Invalid type: MX');
+		expect(error.message).toBe('Invalid type: {{type}}');
 	});
 
 	test('should store translations, params, and defaultLocale for later resolution', (): void => {
@@ -95,7 +95,8 @@ describe.concurrent('LocalizedHttpException', (): void => {
 			defaultLocale: 'en'
 		});
 
-		expect(error.message).toBe('TTL between 60 and 86400');
+		expect(error.message).toBe('TTL between {{min}} and {{max}}');
+		expect(resolveMessage(error)).toBe('TTL between 60 and 86400');
 		expect(resolveMessage(error, 'es')).toBe('TTL entre 60 y 86400');
 	});
 
