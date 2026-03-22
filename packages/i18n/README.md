@@ -56,7 +56,7 @@ const unauthorized = entry({
 	}
 });
 
-// This will produce a plain ResolvedMessage when used in a message catalog
+// This will produce a plain LocalizedMessage when used in a message catalog
 const welcome = entry<{ name: string }>({
 	translations: {
 		en: 'Welcome, {{name}}!',
@@ -124,7 +124,7 @@ const msg = DNS_MESSAGES.recordCreated();
 
 ### Resolving to a specific locale
 
-`resolveMessage` takes a `LocalizedHttpException` or a `ResolvedMessage` and returns the interpolated string for the locale you want.
+`resolveMessage` takes a `LocalizedHttpException` or a `LocalizedMessage` and returns the interpolated string for the locale you want.
 
 ```ts
 import { resolveMessage } from '@dws-std/i18n';

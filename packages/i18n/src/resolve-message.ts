@@ -1,5 +1,5 @@
 import type { LocalizedHttpException } from './exception/localized-http-exception';
-import type { ResolvedMessage } from './message/type/resolved-message';
+import type { LocalizedMessage } from './message/type/localized-message';
 
 const _interpolate = (template: string, params: Readonly<Record<string, string>>): string =>
 	template.replace(
@@ -8,7 +8,7 @@ const _interpolate = (template: string, params: Readonly<Record<string, string>>
 	);
 
 /**
- * Turns a {@link ResolvedMessage} or {@link LocalizedHttpException} into
+ * Turns a {@link LocalizedMessage} or {@link LocalizedHttpException} into
  * a plain string for the requested locale.
  *
  * `{{placeholder}}` tokens are replaced with matching values from `target.params`.
@@ -21,7 +21,7 @@ const _interpolate = (template: string, params: Readonly<Record<string, string>>
  * @returns Translated string with placeholders interpolated.
  */
 export const resolveMessage = (
-	target: LocalizedHttpException | ResolvedMessage,
+	target: LocalizedHttpException | LocalizedMessage,
 	locale?: string
 ): string =>
 	target.params

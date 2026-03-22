@@ -18,7 +18,7 @@ describe.concurrent('defineMessageCatalog', (): void => {
 		expect(typeof catalog.greet).toBe('function');
 	});
 
-	test('should produce a ResolvedMessage with correct translations', (): void => {
+	test('should produce a LocalizedMessage with correct translations', (): void => {
 		const catalog = defineMessageCatalog({
 			defaultLocale: 'en',
 			definitions: {
