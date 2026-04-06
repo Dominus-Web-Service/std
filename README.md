@@ -10,8 +10,9 @@ Everything lives in this monorepo, is built with [Bun](https://bun.sh/), and pub
 | [`@dws-std/common`](packages/common)     | Common utilities and types for Dominus Web Services (DWS) projects.                             |
 | [`@dws-std/error`](packages/error)       | Structured exceptions with UUID v7 tracking and HTTP status codes.                              |
 | [`@dws-std/i18n`](packages/i18n)         | Type-safe internationalization — localized messages and exceptions with template interpolation. |
-| [`@dws-std/jwt`](packages/jwt)           | Simplified JWT handling with sane defaults, human-readable expiration, and standard claims.    |
+| [`@dws-std/jwt`](packages/jwt)           | Simplified JWT handling with sane defaults, human-readable expiration, and standard claims.     |
 | [`@dws-std/registry`](packages/registry) | A centralized, type-safe registry for managing named instances.                                 |
+| [`@dws-std/totp`](packages/totp)         | Time-based One-Time Password (TOTP) implementation in TypeScript.                               |
 
 ## Getting Started
 
@@ -39,7 +40,8 @@ packages/
 ├── i18n/                # @dws-std/i18n
 ├── jwt/                 # @dws-std/jwt
 ├── registry/            # @dws-std/registry
-└── template/            # Scaffold for new packages
+├── template/            # Scaffold for new packages
+└── totp/                # @dws-std/totp
 ```
 
 ## Documentation
