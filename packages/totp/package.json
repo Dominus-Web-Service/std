@@ -1,6 +1,6 @@
 {
 	"name": "@dws-std/totp",
-	"version": "2.1.0",
+	"version": "1.0.0",
 	"description": "Time-based One-Time Password (TOTP) implementation in TypeScript.",
 	"keywords": [
 		"bun",
