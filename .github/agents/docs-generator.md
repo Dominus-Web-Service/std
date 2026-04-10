@@ -10,18 +10,23 @@ Create clear, comprehensive, maintainable documentation.
 ## Documentation Types
 
 ### Code (TSDoc/JSDoc)
-Purpose, @param, @returns, @throws ({@link Type}) – description, @example
+
+Purpose, @param, @returns, @throws ({@link Type}) - description, @example
 
 ### API Endpoints
+
 Method + Path, Headers, Request Body, Response (success + errors)
 
 ### README Structure
+
 Brief description, Features, Installation, Quick Start, Documentation links, Contributing, License
 
 ### ADR (Architecture Decision Record)
+
 Status, Context, Decision, Consequences (positive/negative/neutral)
 
 ## Principles
+
 Clarity: simple language, define terms, include examples
 Completeness: all public APIs, edge cases, error scenarios
 Maintainability: close to code, auto-generate where possible
@@ -30,20 +35,22 @@ Accessibility: clear headings, TOC for long docs, examples
 ## Language-Specific Formats
 
 ### TypeScript/JavaScript (TSDoc)
-```typescript
+
+````typescript
 /**
  * Brief description.
  * @param name - Description
  * @returns Description
- * @throws ({@link ErrorType}) – When condition
+ * @throws ({@link ErrorType}) - When condition
  * @example
  * ```typescript
  * const result = func();
  * ```
  */
-```
+````
 
 ### Zig
+
 ```zig
 /// Brief description.
 /// Returns: description
@@ -52,6 +59,7 @@ pub fn name() !ReturnType {}
 ```
 
 ### C/C++ (Doxygen)
+
 ```c
 /**
  * @brief Brief description.
@@ -71,6 +79,7 @@ pub fn name() !ReturnType {}
 ```
 
 ## Guidelines
+
 - Match existing style
 - Concise but complete
 - Show, don't just tell
