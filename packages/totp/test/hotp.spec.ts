@@ -1,11 +1,10 @@
 import { Exception } from '@dws-std/error';
 import { describe, expect, spyOn, test } from 'bun:test';
 
-import { TOTP_ERROR_KEYS } from '#/constant/totp-error-keys';
-import { generateHOTP, verifyHOTP } from '#/hotp';
+import { generateHOTP, HOTP_ERROR_KEYS, verifyHOTP } from '#/hotp';
 
 // RFC 4226 Appendix D — test values for HOTP with SHA-1
-// Secret = "12345678901234567890" (ASCII), counter 0–9
+// Secret = "12345678901234567890" (ASCII), counter 0-9
 const RFC4226_SECRET = new TextEncoder().encode('12345678901234567890');
 const RFC4226_EXPECTED: readonly string[] = [
 	'755224',
@@ -86,7 +85,7 @@ describe.concurrent('generateHOTP', () => {
 				expect.unreachable();
 			} catch (error) {
 				expect(error).toBeInstanceOf(Exception);
-				expect((error as Exception).key).toBe(TOTP_ERROR_KEYS.INVALID_SECRET);
+				expect((error as Exception).key).toBe(HOTP_ERROR_KEYS.INVALID_SECRET);
 			}
 		});
 
@@ -96,23 +95,20 @@ describe.concurrent('generateHOTP', () => {
 				expect.unreachable();
 			} catch (error) {
 				expect(error).toBeInstanceOf(Exception);
-				expect((error as Exception).key).toBe(TOTP_ERROR_KEYS.INVALID_BASE32);
+				expect((error as Exception).key).toBe(HOTP_ERROR_KEYS.INVALID_BASE32);
 			}
 		});
 
-		test.each([0, -1, 11, 100])(
-			'should throw INVALID_DIGITS for digits=%i',
-			async (digits) => {
-				try {
-					await generateHOTP({ secret: RFC4226_SECRET, counter: 0, digits });
-					expect.unreachable();
-				} catch (error) {
-					expect(error).toBeInstanceOf(Exception);
-					expect((error as Exception).key).toBe(TOTP_ERROR_KEYS.INVALID_DIGITS);
-					expect((error as Exception).cause).toEqual({ digits });
-				}
+		test.each([0, -1, 11, 100])('should throw INVALID_DIGITS for digits=%i', async (digits) => {
+			try {
+				await generateHOTP({ secret: RFC4226_SECRET, counter: 0, digits });
+				expect.unreachable();
+			} catch (error) {
+				expect(error).toBeInstanceOf(Exception);
+				expect((error as Exception).key).toBe(HOTP_ERROR_KEYS.INVALID_DIGITS);
+				expect((error as Exception).cause).toEqual({ digits });
 			}
-		);
+		});
 
 		test('should throw HMAC_FAILED when crypto.subtle.sign fails', async () => {
 			const spy = spyOn(crypto.subtle, 'sign').mockRejectedValue(
@@ -125,7 +121,7 @@ describe.concurrent('generateHOTP', () => {
 			} catch (error) {
 				expect(error).toBeInstanceOf(Exception);
 				expect((error as Exception).message).toBe('HMAC computation failed');
-				expect((error as Exception).key).toBe(TOTP_ERROR_KEYS.HMAC_FAILED);
+				expect((error as Exception).key).toBe(HOTP_ERROR_KEYS.HMAC_FAILED);
 				expect((error as Exception).cause).toBeInstanceOf(Error);
 				expect(((error as Exception).cause as Error).message).toBe('Mocked sign error');
 			} finally {
