@@ -1,8 +1,7 @@
 import { Exception } from '@dws-std/error';
 import { afterEach, describe, expect, test } from 'bun:test';
 
-import { REGISTRY_ERROR_KEYS } from '#/constant/registry-error-keys';
-import { Registry } from '#/registry';
+import { Registry, REGISTRY_ERROR_KEYS } from '#/registry';
 
 class FakeService {
 	public readonly value: string;
