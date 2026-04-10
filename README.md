@@ -40,7 +40,6 @@ packages/
 ├── i18n/                # @dws-std/i18n
 ├── jwt/                 # @dws-std/jwt
 ├── registry/            # @dws-std/registry
-├── template/            # Scaffold for new packages
 └── totp/                # @dws-std/totp
 ```
 

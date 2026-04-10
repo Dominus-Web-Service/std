@@ -43,7 +43,9 @@
         "no-import-assign": "error",
         "no-invalid-regexp": "error",
         "no-irregular-whitespace": "error",
+        "no-iterator": "error",
         "no-loss-of-precision": "error",
+        "no-misleading-character-class": "error",
         "no-new-native-nonconstructor": "error",
         "no-nonoctal-decimal-escape": "error",
         "no-obj-calls": "error",
@@ -111,6 +113,7 @@
         "no-extend-native": "off",
         "no-extra-bind": "error",
         "no-new": "off",
+        "no-shadow": "error", // new add
         "no-unexpected-multiline": "off",
         "no-unneeded-ternary": "error",
         "no-useless-concat": "error",
@@ -223,7 +226,9 @@
         "no-template-curly-in-string": "error",
         "no-ternary": "off",
         "no-useless-computed-key": "error",
+        "object-shorthand": "error", // new add
         "operator-assignment": "warn",
+        "prefer-const": "error", // new add
         "prefer-destructuring": "error",
         "prefer-exponentiation-operator": "error",
         "prefer-numeric-literals": "off",
@@ -268,7 +273,6 @@
         "no-empty": "warn",
         "no-empty-function": "warn",
         "no-eq-null": "off",
-        "no-iterator": "off",
         "no-param-reassign": "off",
         "no-plusplus": "off",
         "no-proto": "error",
@@ -277,6 +281,7 @@
         "no-restricted-imports": "off",
         "no-sequences": "off",
         "no-undefined": "off",
+        "no-use-before-define": "error", // new add
         "no-var": "error",
         "no-void": "off",
         "unicode-bom": "off",
@@ -304,9 +309,10 @@
         // ————————————————————————————————————————————————————————————————————————————— //
         /* ———— Eslint ———— */
         "getter-return": "off",
-        "no-misleading-character-class": "error",
+        "no-restricted-exports": "off", // new add
         "no-undef": "off",
         "no-unreachable": "error",
+        "no-useless-assignment": "error", // new add
 
         /* ———— Typescript ———— */
         "typescript/prefer-optional-chain": "warn"
