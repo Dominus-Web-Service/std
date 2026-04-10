@@ -202,15 +202,16 @@ jobs:
             - name: Generate changelog
               id: changelog
               run: |
-                  PKG_NAME="${{ steps.version.outputs.image-name }}"
+                  PKG_NAME="${{ steps.version.outputs.pkg-name }}"
+                  PKG_DIR="packages/${{ inputs.package }}"
 
-                  # Find last tag
-                  LAST_TAG=$(git tag --list "v*" --sort=-version:refname | head -n1 || true)
+                  # Find last tag for this specific package
+                  LAST_TAG=$(git tag --list "${PKG_NAME}@*" --sort=-version:refname | head -n1 || true)
 
                   if [ -n "$LAST_TAG" ]; then
-                    COMMITS=$(git log "${LAST_TAG}..HEAD" --pretty=format:"%s (%h)")
+                    COMMITS=$(git log "${LAST_TAG}..HEAD" --pretty=format:"%s (%h)" -- "${PKG_DIR}/")
                   else
-                    COMMITS=$(git log --pretty=format:"%s (%h)")
+                    COMMITS=$(git log --pretty=format:"%s (%h)" -- "${PKG_DIR}/")
                   fi
 
                   if [ -z "$COMMITS" ]; then
