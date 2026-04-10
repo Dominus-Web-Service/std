@@ -2,7 +2,13 @@ import { parseHumanTimeToSeconds } from '@dws-std/common';
 import { Exception } from '@dws-std/error';
 import { SignJWT, errors, jwtVerify, type JWTPayload, type JWTVerifyResult } from 'jose';
 
-import { JWT_ERROR_KEYS } from './constant/jwt-error-keys';
+export const JWT_ERROR_KEYS = {
+	JWT_SECRET_TOO_WEAK: 'jwt.secret-too-weak',
+	JWT_EXPIRATION_PASSED: 'jwt.expiration-passed',
+	JWT_SIGN_ERROR: 'jwt.sign-error',
+	JWT_EXPIRED: 'jwt.token-expired',
+	JWT_UNAUTHORIZED: 'jwt.unauthorized'
+} as const;
 
 // Avoid re-instantiation on each call
 const _textEncoder = new TextEncoder();
@@ -19,7 +25,7 @@ export interface VerifyOptions {
  * @param payload - The JWT payload claims
  * @param expiration - Token expiration as seconds offset, Date, or human-readable string (default: 15 minutes)
  *
- * @throws ({@link Exception}) – If secret is too short, expiration is in the past, or signing fails
+ * @throws ({@link Exception}) - If secret is too short, expiration is in the past, or signing fails
  *
  * @returns A Promise resolving to the signed JWT string
  */
@@ -79,7 +85,7 @@ export const signJWT = (
  * @param secret - The secret key used for HS256 verification
  * @param options - Optional verification options for issuer/audience validation
  *
- * @throws ({@link Exception}) – 401 if token is expired, invalid signature, malformed, or claim validation fails
+ * @throws ({@link Exception}) - 401 if token is expired, invalid signature, malformed, or claim validation fails
  *
  * @returns The verification result with payload and protected header
  */

@@ -2,8 +2,7 @@ import { Exception } from '@dws-std/error';
 import { beforeEach, describe, expect, spyOn, test } from 'bun:test';
 import type { JWTPayload } from 'jose';
 
-import { JWT_ERROR_KEYS } from '#/constant/jwt-error-keys';
-import { signJWT, verifyJWT } from '#/jwt';
+import { JWT_ERROR_KEYS, signJWT, verifyJWT } from '#/jwt';
 
 describe.concurrent('JWT Core Functions', () => {
 	const testSecret = 'my-very-secure-secret-key-that-is-long-enough-for-hs256-algorithm';
