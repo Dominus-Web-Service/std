@@ -1,8 +1,10 @@
 import { Exception } from '@dws-std/error';
 import { describe, expect, test } from 'bun:test';
 
-import { PARSE_HUMAN_TIME_TO_SECONDS_ERROR_KEYS } from '#/constant/parse-human-time-to-seconds-error-keys';
-import { parseHumanTimeToSeconds } from '#/parse-human-time-to-seconds';
+import {
+	PARSE_HUMAN_TIME_TO_SECONDS_ERROR_KEYS,
+	parseHumanTimeToSeconds
+} from '#/parse-human-time-to-seconds';
 
 describe.concurrent('parseHumanTimeToSeconds', () => {
 	describe.concurrent('basic time units', () => {
