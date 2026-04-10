@@ -7,11 +7,11 @@ Everything lives in this monorepo, is built with [Bun](https://bun.sh/), and pub
 
 | Package                                  | What it does                                                                                    |
 | ---------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| [`@dws-std/common`](packages/common)     | Common utilities and types for Dominus Web Services (DWS) projects.                             |
-| [`@dws-std/error`](packages/error)       | Structured exceptions with UUID v7 tracking and HTTP status codes.                              |
-| [`@dws-std/i18n`](packages/i18n)         | Type-safe internationalization — localized messages and exceptions with template interpolation. |
-| [`@dws-std/jwt`](packages/jwt)           | Simplified JWT handling with sane defaults, human-readable expiration, and standard claims.     |
-| [`@dws-std/registry`](packages/registry) | A centralized, type-safe registry for managing named instances.                                 |
+| [`@dws-std/common`](packages/common)     | Common utilities and types library for building robust applications.                             |
+| [`@dws-std/error`](packages/error)       | Structured TypeScript exceptions with UUID v7 tracking, HTTP status codes, and automatic timestamps.                              |
+| [`@dws-std/i18n`](packages/i18n)         | Type-safe i18n for TypeScript — define localized exception and message catalogs with compile-time validated parameters. |
+| [`@dws-std/jwt`](packages/jwt)           | JWT utilities and helpers for secure token management.     |
+| [`@dws-std/registry`](packages/registry) | Centralized, type-safe registry for managing named instances.                                 |
 | [`@dws-std/totp`](packages/totp)         | Time-based One-Time Password (TOTP) implementation in TypeScript.                               |
 
 ## Getting Started
@@ -40,7 +40,6 @@ packages/
 ├── i18n/                # @dws-std/i18n
 ├── jwt/                 # @dws-std/jwt
 ├── registry/            # @dws-std/registry
-├── template/            # Scaffold for new packages
 └── totp/                # @dws-std/totp
 ```
 

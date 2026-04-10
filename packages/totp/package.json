@@ -5,8 +5,10 @@
 	"keywords": [
 		"bun",
 		"dws",
-		"dws-totp",
-		"totp"
+		"open-source",
+		"totp",
+		"types",
+		"typescript"
 	],
 	"license": "MIT",
 	"author": "Dominus Web Services (DWS)",

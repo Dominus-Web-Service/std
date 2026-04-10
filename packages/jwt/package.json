@@ -1,12 +1,16 @@
 {
 	"name": "@dws-std/jwt",
 	"version": "1.0.0",
-	"description": "JWT utilities for Dominus Web Services (DWS) projects.",
+	"description": "JWT utilities and helpers for secure token management.",
 	"keywords": [
 		"bun",
 		"dws",
+		"helpers",
 		"jwt",
+		"open-source",
+		"token",
 		"types",
+		"typescript",
 		"utilities"
 	],
 	"license": "MIT",

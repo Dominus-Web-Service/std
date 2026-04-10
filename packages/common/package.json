@@ -1,12 +1,14 @@
 {
 	"name": "@dws-std/common",
 	"version": "1.0.0",
-	"description": "Common utilities and types for Dominus Web Services (DWS) projects.",
+	"description": "Common utilities and types library for building robust applications.",
 	"keywords": [
 		"bun",
-		"common",
 		"dws",
+		"helpers",
+		"open-source",
 		"types",
+		"typescript",
 		"utilities"
 	],
 	"license": "MIT",
