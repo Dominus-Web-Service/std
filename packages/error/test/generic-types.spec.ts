@@ -3,7 +3,7 @@ import { describe, expectTypeOf, test } from 'bun:test';
 import { Exception } from '#/exception';
 import { HttpException } from '#/http-exception';
 
-describe('Generic type TCause', (): void => {
+describe.concurrent('Generic type TCause', (): void => {
 	test('Exception cause should be typed when generic is provided', (): void => {
 		interface DbCause {
 			code: number;
