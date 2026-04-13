@@ -16,7 +16,7 @@ afterEach(() => {
 });
 
 describe.concurrent('Registry', () => {
-	describe.concurrent('register / get', () => {
+	describe('register / get', () => {
 		test('should store and return the exact same instance', () => {
 			const service = new FakeService('original');
 			Registry.register('Service', service);
@@ -64,7 +64,7 @@ describe.concurrent('Registry', () => {
 		});
 	});
 
-	describe.concurrent('unregister', () => {
+	describe('unregister', () => {
 		test('should remove a registered instance', () => {
 			Registry.register('Service', new FakeService('x'));
 			Registry.unregister('Service');
@@ -96,7 +96,7 @@ describe.concurrent('Registry', () => {
 		});
 	});
 
-	describe.concurrent('has', () => {
+	describe('has', () => {
 		test('should return true for registered and false for unregistered names', () => {
 			expect(Registry.has('Service')).toBe(false);
 
@@ -105,7 +105,7 @@ describe.concurrent('Registry', () => {
 		});
 	});
 
-	describe.concurrent('clear', () => {
+	describe('clear', () => {
 		test('should remove all registered instances', () => {
 			Registry.register('A', new FakeService('a'));
 			Registry.register('B', new FakeService('b'));
