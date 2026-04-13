@@ -1,7 +1,15 @@
 {
 	"typedocOptions": {
 		"entryPointStrategy": "packages",
-		"entryPoints": ["packages/common", "packages/error", "packages/i18n", "packages/jwt", "packages/registry", "packages/totp"],
+		"entryPoints": [
+			"packages/common",
+			"packages/error",
+			"packages/i18n",
+			"packages/jwt",
+			"packages/kv-store",
+			"packages/registry",
+			"packages/totp"
+		],
 		"out": "docs",
 		"name": "DWS Packages",
 		"hideGenerator": true,

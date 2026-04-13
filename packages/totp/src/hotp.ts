@@ -1,12 +1,15 @@
 import { Exception } from '@dws-std/error';
 import { timingSafeEqual } from 'crypto';
 
-import { TOTP_ERROR_KEYS } from '#/constant/totp-error-keys';
+import type { OTPAlgorithm } from '#/type/otp-algorithm';
 import { createCounterBuffer } from '#/util/create-counter-buffer';
 import { decodeBase32 } from '#/util/decode-base32';
 
-/** Supported HMAC algorithms for OTP generation. */
-export type OTPAlgorithm = 'SHA-1' | 'SHA-256' | 'SHA-512';
+export const HOTP_ERROR_KEYS = {
+	INVALID_SECRET: 'totp.hotp.invalid-secret',
+	INVALID_DIGITS: 'totp.hotp.invalid-digits',
+	HMAC_FAILED: 'totp.hotp.hmac-failed'
+} as const;
 
 /** Options for HOTP code generation. */
 export interface GenerateHOTPOptions {
@@ -16,7 +19,7 @@ export interface GenerateHOTPOptions {
 	/** The counter value. */
 	readonly counter: number | bigint;
 
-	/** Number of digits in the generated code (1–10, default: 6). */
+	/** Number of digits in the generated code (1-10, default: 6). */
 	readonly digits?: number | undefined;
 
 	/** HMAC algorithm to use (default: `'SHA-1'`). */
@@ -51,7 +54,7 @@ const _dynamicTruncate = (hmac: Uint8Array<ArrayBuffer>, digits: number): string
  *
  * @param options - HOTP generation parameters.
  *
- * @throws ({@link Exception}) – If the secret is empty, digits is out of range, or HMAC computation fails.
+ * @throws ({@link Exception}) - If the secret is empty, digits is out of range, or HMAC computation fails.
  *
  * @returns The generated OTP code as a zero-padded string.
  */
@@ -61,12 +64,12 @@ export const generateHOTP = async (options: GenerateHOTPOptions): Promise<string
 	const secretBytes = typeof secret === 'string' ? decodeBase32(secret) : new Uint8Array(secret);
 	if (secretBytes.length === 0)
 		throw new Exception('Secret must not be empty', {
-			key: TOTP_ERROR_KEYS.INVALID_SECRET
+			key: HOTP_ERROR_KEYS.INVALID_SECRET
 		});
 
 	if (digits < 1 || digits > 10)
 		throw new Exception('Digits must be between 1 and 10', {
-			key: TOTP_ERROR_KEYS.INVALID_DIGITS,
+			key: HOTP_ERROR_KEYS.INVALID_DIGITS,
 			cause: { digits }
 		});
 
@@ -79,7 +82,7 @@ export const generateHOTP = async (options: GenerateHOTPOptions): Promise<string
 	} catch (error) {
 		if (error instanceof Exception) throw error;
 		throw new Exception('HMAC computation failed', {
-			key: TOTP_ERROR_KEYS.HMAC_FAILED,
+			key: HOTP_ERROR_KEYS.HMAC_FAILED,
 			cause: error
 		});
 	}
@@ -92,7 +95,7 @@ export const generateHOTP = async (options: GenerateHOTPOptions): Promise<string
  *
  * @param options - HOTP verification parameters.
  *
- * @throws ({@link Exception}) – If any generation parameter is invalid.
+ * @throws ({@link Exception}) - If any generation parameter is invalid.
  *
  * @returns `true` if the OTP matches any counter in the window, `false` otherwise.
  */
@@ -113,7 +116,10 @@ export const verifyHOTP = async (options: VerifyHOTPOptions): Promise<boolean> =
 	let match = false;
 	for (const candidate of candidates) {
 		const candidateBuffer = Buffer.from(candidate);
-		if (candidateBuffer.length === otpBuffer.length && timingSafeEqual(candidateBuffer, otpBuffer))
+		if (
+			candidateBuffer.length === otpBuffer.length &&
+			timingSafeEqual(candidateBuffer, otpBuffer)
+		)
 			match = true;
 	}
 	return match;

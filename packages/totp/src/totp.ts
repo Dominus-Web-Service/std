@@ -1,15 +1,19 @@
 import { Exception } from '@dws-std/error';
 import { timingSafeEqual } from 'crypto';
 
-import { TOTP_ERROR_KEYS } from '#/constant/totp-error-keys';
-import { generateHOTP, type OTPAlgorithm } from '#/hotp';
+import type { OTPAlgorithm } from '#/type/otp-algorithm';
+import { generateHOTP } from '#/hotp';
+
+export const TOTP_ERROR_KEYS = {
+	INVALID_PERIOD: 'totp.invalid-period'
+} as const;
 
 /** Options for TOTP code generation. */
 export interface GenerateTOTPOptions {
 	/** The shared secret, either as a base32-encoded string or raw bytes. */
 	readonly secret: string | Uint8Array;
 
-	/** Number of digits in the generated code (1–10, default: 6). */
+	/** Number of digits in the generated code (1-10, default: 6). */
 	readonly digits?: number | undefined;
 
 	/** HMAC algorithm to use (default: `'SHA-1'`). */
@@ -36,7 +40,7 @@ export interface VerifyTOTPOptions extends GenerateTOTPOptions {
  *
  * @param options - TOTP generation parameters.
  *
- * @throws ({@link Exception}) – If the period is invalid or HOTP generation fails.
+ * @throws ({@link Exception}) - If the period is invalid or HOTP generation fails.
  *
  * @returns The generated OTP code as a zero-padded string.
  */
@@ -60,12 +64,18 @@ export const generateTOTP = (options: GenerateTOTPOptions): Promise<string> => {
  *
  * @param options - TOTP verification parameters.
  *
- * @throws ({@link Exception}) – If any generation parameter is invalid.
+ * @throws ({@link Exception}) - If any generation parameter is invalid.
  *
  * @returns `true` if the OTP matches any time step in the window, `false` otherwise.
  */
 export const verifyTOTP = async (options: VerifyTOTPOptions): Promise<boolean> => {
-	const { otp, window = 1, period = 30, time = Math.floor(Date.now() / 1000), ...hotpOptions } = options;
+	const {
+		otp,
+		window = 1,
+		period = 30,
+		time = Math.floor(Date.now() / 1000),
+		...hotpOptions
+	} = options;
 
 	if (period <= 0)
 		throw new Exception('Period must be a positive number', {
@@ -85,7 +95,10 @@ export const verifyTOTP = async (options: VerifyTOTPOptions): Promise<boolean> =
 	let match = false;
 	for (const candidate of candidates) {
 		const candidateBuffer = Buffer.from(candidate);
-		if (candidateBuffer.length === otpBuffer.length && timingSafeEqual(candidateBuffer, otpBuffer))
+		if (
+			candidateBuffer.length === otpBuffer.length &&
+			timingSafeEqual(candidateBuffer, otpBuffer)
+		)
 			match = true;
 	}
 	return match;

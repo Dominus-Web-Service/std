@@ -1,9 +1,8 @@
 import { Exception } from '@dws-std/error';
 import { describe, expect, test } from 'bun:test';
 
-import { TOTP_ERROR_KEYS } from '#/constant/totp-error-keys';
-import { generateHOTP } from '#/hotp';
-import { generateTOTP, verifyTOTP } from '#/totp';
+import { generateHOTP, HOTP_ERROR_KEYS } from '#/hotp';
+import { generateTOTP, TOTP_ERROR_KEYS, verifyTOTP } from '#/totp';
 
 // RFC 6238 Appendix B — test values
 // Secret = "12345678901234567890" (ASCII) for SHA-1
@@ -37,7 +36,12 @@ const RFC6238_VECTORS: readonly {
 	{ time: 2000000000, algorithm: 'SHA-256', secret: RFC6238_SHA256_SECRET, expected: '90698825' },
 	{ time: 2000000000, algorithm: 'SHA-512', secret: RFC6238_SHA512_SECRET, expected: '38618901' },
 	{ time: 20000000000, algorithm: 'SHA-1', secret: RFC6238_SHA1_SECRET, expected: '65353130' },
-	{ time: 20000000000, algorithm: 'SHA-256', secret: RFC6238_SHA256_SECRET, expected: '77737706' },
+	{
+		time: 20000000000,
+		algorithm: 'SHA-256',
+		secret: RFC6238_SHA256_SECRET,
+		expected: '77737706'
+	},
 	{ time: 20000000000, algorithm: 'SHA-512', secret: RFC6238_SHA512_SECRET, expected: '47863826' }
 ];
 
@@ -63,7 +67,10 @@ describe.concurrent('generateTOTP', () => {
 	test('should use current time by default', async () => {
 		const expectedCounter = Math.floor(Date.now() / 1000 / 30);
 		const otp = await generateTOTP({ secret: RFC6238_SHA1_SECRET });
-		const hotpOtp = await generateHOTP({ secret: RFC6238_SHA1_SECRET, counter: expectedCounter });
+		const hotpOtp = await generateHOTP({
+			secret: RFC6238_SHA1_SECRET,
+			counter: expectedCounter
+		});
 		expect(otp).toBe(hotpOtp);
 	});
 
@@ -98,19 +105,16 @@ describe.concurrent('generateTOTP', () => {
 	});
 
 	describe.concurrent('error handling', () => {
-		test.each([0, -1, -30])(
-			'should throw INVALID_PERIOD for period=%i',
-			async (period) => {
-				try {
-					await generateTOTP({ secret: RFC6238_SHA1_SECRET, period });
-					expect.unreachable();
-				} catch (error) {
-					expect(error).toBeInstanceOf(Exception);
-					expect((error as Exception).key).toBe(TOTP_ERROR_KEYS.INVALID_PERIOD);
-					expect((error as Exception).cause).toEqual({ period });
-				}
+		test.each([0, -1, -30])('should throw INVALID_PERIOD for period=%i', async (period) => {
+			try {
+				await generateTOTP({ secret: RFC6238_SHA1_SECRET, period });
+				expect.unreachable();
+			} catch (error) {
+				expect(error).toBeInstanceOf(Exception);
+				expect((error as Exception).key).toBe(TOTP_ERROR_KEYS.INVALID_PERIOD);
+				expect((error as Exception).cause).toEqual({ period });
 			}
-		);
+		});
 
 		test('should throw INVALID_SECRET for empty secret', async () => {
 			try {
@@ -118,7 +122,7 @@ describe.concurrent('generateTOTP', () => {
 				expect.unreachable();
 			} catch (error) {
 				expect(error).toBeInstanceOf(Exception);
-				expect((error as Exception).key).toBe(TOTP_ERROR_KEYS.INVALID_SECRET);
+				expect((error as Exception).key).toBe(HOTP_ERROR_KEYS.INVALID_SECRET);
 			}
 		});
 	});
@@ -158,14 +162,24 @@ describe.concurrent('verifyTOTP', () => {
 	test('should reject OTP beyond the window', async () => {
 		const time = 90; // counter = 3
 		const farOtp = await generateTOTP({ secret: RFC6238_SHA1_SECRET, time: 0 }); // counter = 0
-		const result = await verifyTOTP({ secret: RFC6238_SHA1_SECRET, time, otp: farOtp, window: 1 });
+		const result = await verifyTOTP({
+			secret: RFC6238_SHA1_SECRET,
+			time,
+			otp: farOtp,
+			window: 1
+		});
 		expect(result).toBe(false);
 	});
 
 	test('should accept OTP within a larger window', async () => {
 		const time = 90; // counter = 3
 		const farOtp = await generateTOTP({ secret: RFC6238_SHA1_SECRET, time: 0 }); // counter = 0
-		const result = await verifyTOTP({ secret: RFC6238_SHA1_SECRET, time, otp: farOtp, window: 3 });
+		const result = await verifyTOTP({
+			secret: RFC6238_SHA1_SECRET,
+			time,
+			otp: farOtp,
+			window: 3
+		});
 		expect(result).toBe(true);
 	});
 

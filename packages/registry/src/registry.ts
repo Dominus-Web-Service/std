@@ -1,6 +1,10 @@
 import { Exception } from '@dws-std/error';
 
-import { REGISTRY_ERROR_KEYS } from './constant/registry-error-keys';
+/** Error codes thrown by the {@link Registry} class. */
+export const REGISTRY_ERROR_KEYS = {
+	CLASS_INSTANCE_ALREADY_REGISTERED: 'registry.class-instance-already-registered',
+	CLASS_INSTANCE_NOT_REGISTERED: 'registry.class-instance-not-registered'
+} as const;
 
 /**
  * Global, type-safe store for named instances.
@@ -29,7 +33,7 @@ export class Registry {
 	 * @param name - Unique identifier for this instance.
 	 * @param instance - The object to store.
 	 *
-	 * @throws ({@link Exception}) – `name` is already taken.
+	 * @throws ({@link Exception}) - `name` is already taken.
 	 */
 	public static register<TClass extends object>(name: string, instance: TClass): void {
 		if (this._registry.has(name))
@@ -47,7 +51,7 @@ export class Registry {
 	 *
 	 * @param name - Identifier of the instance to remove.
 	 *
-	 * @throws ({@link Exception}) – `name` is not registered.
+	 * @throws ({@link Exception}) - `name` is not registered.
 	 */
 	public static unregister(name: string): void {
 		if (!this._registry.delete(name))
@@ -67,7 +71,7 @@ export class Registry {
 	 *
 	 * @param name - Identifier of the instance to retrieve.
 	 *
-	 * @throws ({@link Exception}) – `name` is not registered.
+	 * @throws ({@link Exception}) - `name` is not registered.
 	 */
 	public static get<TClass>(name: string): TClass {
 		const instance = this._registry.get(name);
