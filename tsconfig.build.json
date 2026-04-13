@@ -3,6 +3,7 @@
 		"entryPointStrategy": "packages",
 		"entryPoints": [
 			"packages/common",
+			"packages/elysia-ratelimit",
 			"packages/error",
 			"packages/i18n",
 			"packages/jwt",
