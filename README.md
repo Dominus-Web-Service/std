@@ -8,6 +8,7 @@ Everything lives in this monorepo, is built with [Bun](https://bun.sh/), and pub
 | Package                                  | What it does                                                                                                            |
 | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | [`@dws-std/common`](packages/common)     | Common utilities and types library for building robust applications.                                                    |
+| [`@dws-std/elysia-ratelimit`](packages/elysia-ratelimit) | Elysia plugin for flexible, type-safe rate limiting with support for custom key generators and various backends. |
 | [`@dws-std/error`](packages/error)       | Structured TypeScript exceptions with UUID v7 tracking, HTTP status codes, and automatic timestamps.                    |
 | [`@dws-std/i18n`](packages/i18n)         | Type-safe i18n for TypeScript — define localized exception and message catalogs with compile-time validated parameters. |
 | [`@dws-std/jwt`](packages/jwt)           | JWT utilities and helpers for secure token management.                                                                  |
@@ -37,6 +38,7 @@ bun install
 ```
 packages/
 ├── common/              # @dws-std/common
+├── elysia-ratelimit/    # @dws-std/elysia-ratelimit
 ├── error/               # @dws-std/error
 ├── i18n/                # @dws-std/i18n
 ├── jwt/                 # @dws-std/jwt

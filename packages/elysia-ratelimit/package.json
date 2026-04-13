@@ -1,15 +1,15 @@
 {
-	"name": "@dws-std/i18n",
-	"version": "1.3.0",
-	"description": "Type-safe i18n for TypeScript, define localized exception and message catalogs with compile-time validated parameters.",
+	"name": "@dws-std/elysia-ratelimit",
+	"version": "1.0.0",
+	"description": "Rate limiting plugin for Elysia framework.",
 	"keywords": [
 		"bun",
 		"dws",
-		"i18n",
-		"internationalization",
-		"localization",
+		"elysia",
+		"macro",
 		"open-source",
-		"translation",
+		"plugin",
+		"ratelimit",
 		"typescript"
 	],
 	"license": "MIT",
@@ -17,7 +17,7 @@
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Dominus-Web-Service/std",
-		"directory": "packages/i18n"
+		"directory": "packages/elysia-ratelimit"
 	},
 	"files": [
 		"dist"
@@ -40,7 +40,9 @@
 		"test": "bun test --pass-with-no-tests --coverage"
 	},
 	"dependencies": {
-		"@dws-std/error": "workspace:^"
+		"@dws-std/error": "workspace:^",
+		"@dws-std/kv-store": "workspace:^",
+		"elysia": "^1.4.28"
 	},
 	"devDependencies": {
 		"@types/bun": "catalog:base",
@@ -50,6 +52,8 @@
 		"typescript": "catalog:base"
 	},
 	"peerDependencies": {
-		"@dws-std/error": "workspace:^"
+		"@dws-std/error": "workspace:^",
+		"@dws-std/kv-store": "workspace:^",
+		"elysia": "^1.4.28"
 	}
 }
