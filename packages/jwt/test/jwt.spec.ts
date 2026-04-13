@@ -21,7 +21,7 @@ describe.concurrent('JWT Core Functions', () => {
 		currentTime = Math.floor(Date.now() / 1000);
 	});
 
-	describe.concurrent('signJWT', () => {
+	describe('signJWT', () => {
 		test('should sign a JWT with default expiration (15 minutes)', async () => {
 			const payload: JWTPayload = { sub: userUuid, role: 'admin' };
 			const token = await signJWT(testSecret, payload);
@@ -262,7 +262,7 @@ describe.concurrent('JWT Core Functions', () => {
 		});
 	});
 
-	describe.concurrent('verifyJWT', () => {
+	describe('verifyJWT', () => {
 		test('should verify valid JWT and return payload', async () => {
 			const payload: JWTPayload = { userId: 777, role: 'user' };
 			const token = await signJWT(testSecret, payload);
@@ -376,7 +376,7 @@ describe.concurrent('JWT Core Functions', () => {
 		});
 	});
 
-	describe.concurrent('integration scenarios', () => {
+	describe('integration scenarios', () => {
 		test.each([
 			{ name: 'string values', payload: { name: 'John Doe', role: 'admin' } },
 			{ name: 'numeric values', payload: { userId: 12345, score: 98.5 } },
@@ -444,7 +444,7 @@ describe.concurrent('JWT Core Functions', () => {
 		});
 	});
 
-	describe.concurrent('signJWT secret validation', () => {
+	describe('signJWT secret validation', () => {
 		test('should throw Exception with JWT_SECRET_TOO_WEAK when secret is too short', async () => {
 			const shortSecret = 'too-short-secret';
 
