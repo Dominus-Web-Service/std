@@ -2,6 +2,7 @@ import { Exception } from '@dws-std/error';
 import { describe, expect, spyOn, test } from 'bun:test';
 
 import { generateHOTP, HOTP_ERROR_KEYS, verifyHOTP } from '#/hotp';
+import { DECODE_BASE32_ERROR_KEYS } from '#/util/decode-base32';
 
 // RFC 4226 Appendix D — test values for HOTP with SHA-1
 // Secret = "12345678901234567890" (ASCII), counter 0-9
@@ -95,7 +96,7 @@ describe.concurrent('generateHOTP', () => {
 				expect.unreachable();
 			} catch (error) {
 				expect(error).toBeInstanceOf(Exception);
-				expect((error as Exception).key).toBe(HOTP_ERROR_KEYS.INVALID_BASE32);
+				expect((error as Exception).key).toBe(DECODE_BASE32_ERROR_KEYS.INVALID_CHAR);
 			}
 		});
 
