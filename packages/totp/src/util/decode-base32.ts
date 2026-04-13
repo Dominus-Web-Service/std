@@ -1,6 +1,8 @@
 import { Exception } from '@dws-std/error';
 
-import { HOTP_ERROR_KEYS } from '#/hotp';
+export const DECODE_BASE32_ERROR_KEYS = {
+	INVALID_CHAR: 'totp.decode-base32.invalid-char'
+} as const;
 
 const _BASE32_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
 const _BASE32_CHARS = new Set(_BASE32_ALPHABET);
@@ -20,7 +22,7 @@ export const decodeBase32 = (input: string): Uint8Array<ArrayBuffer> => {
 	for (const char of sanitized)
 		if (!_BASE32_CHARS.has(char))
 			throw new Exception(`Invalid base32 character: '${char}'`, {
-				key: HOTP_ERROR_KEYS.INVALID_BASE32,
+				key: DECODE_BASE32_ERROR_KEYS.INVALID_CHAR,
 				cause: { input, invalidCharacter: char }
 			});
 

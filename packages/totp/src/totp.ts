@@ -1,7 +1,8 @@
 import { Exception } from '@dws-std/error';
 import { timingSafeEqual } from 'crypto';
 
-import { generateHOTP, type OTPAlgorithm } from '#/hotp';
+import type { OTPAlgorithm } from '#/type/otp-algorithm';
+import { generateHOTP } from '#/hotp';
 
 export const TOTP_ERROR_KEYS = {
 	INVALID_PERIOD: 'totp.invalid-period'

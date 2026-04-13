@@ -1,18 +1,15 @@
 import { Exception } from '@dws-std/error';
 import { timingSafeEqual } from 'crypto';
 
+import type { OTPAlgorithm } from '#/type/otp-algorithm';
 import { createCounterBuffer } from '#/util/create-counter-buffer';
 import { decodeBase32 } from '#/util/decode-base32';
 
 export const HOTP_ERROR_KEYS = {
 	INVALID_SECRET: 'totp.hotp.invalid-secret',
 	INVALID_DIGITS: 'totp.hotp.invalid-digits',
-	HMAC_FAILED: 'totp.hotp.hmac-failed',
-	INVALID_BASE32: 'totp.hotp.invalid-base32'
+	HMAC_FAILED: 'totp.hotp.hmac-failed'
 } as const;
-
-/** Supported HMAC algorithms for OTP generation. */
-export type OTPAlgorithm = 'SHA-1' | 'SHA-256' | 'SHA-512';
 
 /** Options for HOTP code generation. */
 export interface GenerateHOTPOptions {
