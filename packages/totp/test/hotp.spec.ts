@@ -20,7 +20,7 @@ const RFC4226_EXPECTED: readonly string[] = [
 ];
 
 describe.concurrent('generateHOTP', () => {
-	describe.concurrent('RFC 4226 test vectors', () => {
+	describe('RFC 4226 test vectors', () => {
 		test.each(
 			RFC4226_EXPECTED.map((expected, counter) => ({
 				name: `counter=${counter}`,
@@ -78,7 +78,7 @@ describe.concurrent('generateHOTP', () => {
 		expect(otp1).toBe(otp2);
 	});
 
-	describe.concurrent('error handling', () => {
+	describe('error handling', () => {
 		test('should throw INVALID_SECRET for empty Uint8Array secret', async () => {
 			try {
 				await generateHOTP({ secret: new Uint8Array(0), counter: 0 });
@@ -131,7 +131,7 @@ describe.concurrent('generateHOTP', () => {
 	});
 });
 
-describe.concurrent('verifyHOTP', () => {
+describe('verifyHOTP', () => {
 	test('should return true for a valid OTP at exact counter', async () => {
 		const result = await verifyHOTP({
 			secret: RFC4226_SECRET,
