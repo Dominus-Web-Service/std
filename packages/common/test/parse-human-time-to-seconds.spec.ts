@@ -7,7 +7,7 @@ import {
 } from '#/parse-human-time-to-seconds';
 
 describe.concurrent('parseHumanTimeToSeconds', () => {
-	describe.concurrent('basic time units', () => {
+	describe('basic time units', () => {
 		test.each([
 			// Seconds
 			['1 second', 1],
@@ -46,7 +46,7 @@ describe.concurrent('parseHumanTimeToSeconds', () => {
 		});
 	});
 
-	describe.concurrent('decimal values', () => {
+	describe('decimal values', () => {
 		test.each([
 			// Decimal seconds
 			['1.5 seconds', 2], // Rounded
@@ -68,7 +68,7 @@ describe.concurrent('parseHumanTimeToSeconds', () => {
 		});
 	});
 
-	describe.concurrent('directional modifiers', () => {
+	describe('directional modifiers', () => {
 		test.each([
 			// "ago" suffix for past times
 			['1 hour ago', -3600],
@@ -93,7 +93,7 @@ describe.concurrent('parseHumanTimeToSeconds', () => {
 		});
 	});
 
-	describe.concurrent('whitespace handling', () => {
+	describe('whitespace handling', () => {
 		test.each([
 			['1hour', 3600], // Regex allows no space
 			['1 hour', 3600],
@@ -108,7 +108,7 @@ describe.concurrent('parseHumanTimeToSeconds', () => {
 		});
 	});
 
-	describe.concurrent('case insensitivity', () => {
+	describe('case insensitivity', () => {
 		test.each([
 			['1 HOUR', 3600],
 			['30 Minutes', 1800],
@@ -122,7 +122,7 @@ describe.concurrent('parseHumanTimeToSeconds', () => {
 		});
 	});
 
-	describe.concurrent('complex scenarios', () => {
+	describe('complex scenarios', () => {
 		test.each([
 			['15 mins', 900],
 			['2.5 hours', 9000],
@@ -145,7 +145,7 @@ describe.concurrent('parseHumanTimeToSeconds', () => {
 		});
 	});
 
-	describe.concurrent('error handling', () => {
+	describe('error handling', () => {
 		test.each([
 			'invalid format',
 			'1',
@@ -213,7 +213,7 @@ describe.concurrent('parseHumanTimeToSeconds', () => {
 		});
 	});
 
-	describe.concurrent('precision and rounding', () => {
+	describe('precision and rounding', () => {
 		test.each([
 			['1.4 seconds', 1],
 			['1.5 seconds', 2],
@@ -236,7 +236,7 @@ describe.concurrent('parseHumanTimeToSeconds', () => {
 		);
 	});
 
-	describe.concurrent('boundary testing', () => {
+	describe('boundary testing', () => {
 		test.each([
 			['999999 seconds', 999999],
 			['1000 years', 31557600000]
