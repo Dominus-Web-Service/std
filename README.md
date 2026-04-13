@@ -5,14 +5,15 @@ Everything lives in this monorepo, is built with [Bun](https://bun.sh/), and pub
 
 ## Packages
 
-| Package                                  | What it does                                                                                    |
-| ---------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| [`@dws-std/common`](packages/common)     | Common utilities and types library for building robust applications.                             |
-| [`@dws-std/error`](packages/error)       | Structured TypeScript exceptions with UUID v7 tracking, HTTP status codes, and automatic timestamps.                              |
+| Package                                  | What it does                                                                                                            |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| [`@dws-std/common`](packages/common)     | Common utilities and types library for building robust applications.                                                    |
+| [`@dws-std/error`](packages/error)       | Structured TypeScript exceptions with UUID v7 tracking, HTTP status codes, and automatic timestamps.                    |
 | [`@dws-std/i18n`](packages/i18n)         | Type-safe i18n for TypeScript — define localized exception and message catalogs with compile-time validated parameters. |
-| [`@dws-std/jwt`](packages/jwt)           | JWT utilities and helpers for secure token management.     |
-| [`@dws-std/registry`](packages/registry) | Centralized, type-safe registry for managing named instances.                                 |
-| [`@dws-std/totp`](packages/totp)         | Time-based One-Time Password (TOTP) implementation in TypeScript.                               |
+| [`@dws-std/jwt`](packages/jwt)           | JWT utilities and helpers for secure token management.                                                                  |
+| [`@dws-std/kv-store`](packages/kv-store) | Type-safe key-value store abstraction with support for multiple backends.                                               |
+| [`@dws-std/registry`](packages/registry) | Centralized, type-safe registry for managing named instances.                                                           |
+| [`@dws-std/totp`](packages/totp)         | Time-based One-Time Password (TOTP) implementation in TypeScript.                                                       |
 
 ## Getting Started
 
@@ -39,6 +40,7 @@ packages/
 ├── error/               # @dws-std/error
 ├── i18n/                # @dws-std/i18n
 ├── jwt/                 # @dws-std/jwt
+├── kv-store/            # @dws-std/kv-store
 ├── registry/            # @dws-std/registry
 └── totp/                # @dws-std/totp
 ```
