@@ -11,7 +11,7 @@
 		],
 		"catalogs": {
 			"base": {
-				"@types/bun": "^1.3.11",
+				"@types/bun": "^1.3.12",
 				"oxfmt": "0.44.0",
 				"oxlint-tsgolint": "0.20.0",
 				"oxlint": "1.59.0",
