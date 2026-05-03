@@ -153,11 +153,7 @@ jobs:
                       PRERELEASE="true"
                       ;;
                   esac
-
-                  if [ "${{ inputs.channel }}" = "stable" ]; then
-                    jq --arg v "$VERSION" '.version = $v' package.json > tmp.json && mv tmp.json package.json
-                  fi
-
+                  jq --arg v "$VERSION" '.version = $v' package.json > tmp.json && mv tmp.json package.json
                   PKG_NAME=$(jq -r .name package.json)
                   TAG="${PKG_NAME}@${VERSION}"
 
