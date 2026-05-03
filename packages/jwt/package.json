@@ -43,7 +43,7 @@
   "dependencies": {
     "@dws-std/common": "workspace:^",
     "@dws-std/error": "workspace:^",
-    "jose": "^6.2.2"
+    "jose": "^6.2.3"
   },
   "devDependencies": {
     "@types/bun": "catalog:base",
