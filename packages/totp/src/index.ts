@@ -20,3 +20,4 @@ export {
 } from './totp';
 export type { OTPAlgorithm } from './type/otp-algorithm';
 export { DECODE_BASE32_ERROR_KEYS, decodeBase32 } from './util/decode-base32';
+export { generateOTPSecret } from './util/generate-secret';
