@@ -35,7 +35,7 @@ export const rateLimitPlugin = (
 	{ decorator: {}; derive: {}; resolve: {}; store: {} },
 	{
 		typebox: {
-			RateLimitError: (typeof rateLimitContract)[409];
+			RateLimitError: (typeof rateLimitContract)[429];
 		};
 		error: {};
 	},
@@ -43,7 +43,7 @@ export const rateLimitPlugin = (
 		macro: Partial<{ readonly rateLimit: RateLimitMacroOptions }>;
 		macroFn: {
 			rateLimit: (options: RateLimitMacroOptions) => {
-				response: { 409: 'RateLimitError' };
+				response: { 429: 'RateLimitError' };
 				transform: ({
 					set,
 					request,
@@ -69,12 +69,12 @@ export const rateLimitPlugin = (
 		seed: store
 	})
 		.model({
-			RateLimitError: rateLimitContract[409]
+			RateLimitError: rateLimitContract[429]
 		})
 		.macro({
 			rateLimit: ({ limit, window, keyGenerator }: RateLimitMacroOptions) => ({
 				response: {
-					409: 'RateLimitError'
+					429: 'RateLimitError'
 				} as const,
 				// Uses transform because it's the first per-route hook in Elysia's lifecycle,
 				// running before derive, resolve, and beforeHandle.
