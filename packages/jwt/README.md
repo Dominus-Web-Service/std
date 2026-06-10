@@ -1,7 +1,7 @@
 # 🔐 DWS JWT
 
 Signing and verifying JWTs shouldn't require boilerplate.  
-`@dws-std/jwt` wraps [jose](https://github.com/panva/jose) with sane defaults — HS256, standard claims pre-filled, human-readable expiration - so you can focus on what matters instead of re-reading the JWT spec.
+`@dws-std/jwt` wraps [jose](https://github.com/panva/jose) with sane defaults — HS256, standard claims pre-filled — so you can focus on what matters instead of re-reading the JWT spec.
 
 ## 📌 Table of Contents
 
@@ -33,14 +33,6 @@ const token = await signJWT(secret, { userId: 42, role: 'admin' });
 
 // Numeric offset in seconds
 const token = await signJWT(secret, { userId: 42 }, 3600);
-
-// Date object
-const token = await signJWT(secret, { userId: 42 }, new Date(Date.now() + 3600_000));
-
-// Human-readable — powered by @dws-std/common
-const token = await signJWT(secret, { userId: 42 }, '1 hour');
-const token = await signJWT(secret, { userId: 42 }, '30 minutes');
-const token = await signJWT(secret, { userId: 42 }, '7 days');
 ```
 
 The secret must be at least 32 characters long (HS256 requirement). Any shorter and it throws immediately — better to catch it at startup than in production.
