@@ -43,25 +43,25 @@ describe.concurrent('JWT Core Functions', () => {
 			{
 				name: 'numeric expiration (seconds offset)',
 				getExpiration: (): number => ONE_HOUR,
-				expectedExpiration: (currentTime: number): number => currentTime + ONE_HOUR,
+				expectedExpiration: (timestampNow: number): number => timestampNow + ONE_HOUR,
 				tolerance: 5
 			},
 			{
 				name: 'numeric expiration (2 hours)',
 				getExpiration: (): number => TWO_HOURS,
-				expectedExpiration: (currentTime: number): number => currentTime + TWO_HOURS,
+				expectedExpiration: (timestampNow: number): number => timestampNow + TWO_HOURS,
 				tolerance: 5
 			},
 			{
 				name: 'numeric expiration (30 minutes)',
 				getExpiration: (): number => 30 * 60,
-				expectedExpiration: (currentTime: number): number => currentTime + 30 * 60,
+				expectedExpiration: (timestampNow: number): number => timestampNow + 30 * 60,
 				tolerance: 5
 			},
 			{
 				name: 'numeric expiration (1 day)',
 				getExpiration: (): number => 24 * 60 * 60,
-				expectedExpiration: (currentTime: number): number => currentTime + 24 * 60 * 60,
+				expectedExpiration: (timestampNow: number): number => timestampNow + 24 * 60 * 60,
 				tolerance: 5
 			}
 		])(
