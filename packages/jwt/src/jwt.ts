@@ -1,4 +1,3 @@
-import { parseHumanTimeToSeconds } from '@dws-std/common';
 import { Exception } from '@dws-std/error';
 import { SignJWT, errors, jwtVerify, type JWTPayload, type JWTVerifyResult } from 'jose';
 
@@ -23,7 +22,7 @@ export interface VerifyOptions {
  *
  * @param secret - The secret key used for HS256 signing (minimum 32 characters)
  * @param payload - The JWT payload claims
- * @param expiration - Token expiration as seconds offset, Date, or human-readable string (default: 15 minutes)
+ * @param expirationSeconds - Token expiration as a seconds offset from now (default: 15 minutes)
  *
  * @throws ({@link Exception}) - If secret is too short, expiration is in the past, or signing fails
  *
@@ -32,7 +31,7 @@ export interface VerifyOptions {
 export const signJWT = (
 	secret: string,
 	payload: JWTPayload,
-	expiration: number | string | Date = 60 * 15 // 15 minutes
+	expirationSeconds: number = 60 * 15 // 15 minutes
 ): Promise<string> => {
 	if (secret.length < 32)
 		throw new Exception('Secret key must be at least 32 characters long', {
@@ -41,18 +40,12 @@ export const signJWT = (
 		});
 
 	const nowSeconds = Math.floor(Date.now() / 1000);
-
-	const exp =
-		expiration instanceof Date
-			? Math.floor(expiration.getTime() / 1000)
-			: typeof expiration === 'number'
-				? nowSeconds + expiration
-				: nowSeconds + parseHumanTimeToSeconds(expiration);
+	const exp = nowSeconds + expirationSeconds;
 
 	if (exp <= nowSeconds)
 		throw new Exception('Expiration time must be in the future', {
 			key: JWT_ERROR_KEYS.JWT_EXPIRATION_PASSED,
-			cause: { providedExpiration: expiration }
+			cause: { providedExpirationSeconds: expirationSeconds }
 		});
 
 	const finalPayload: JWTPayload = {
