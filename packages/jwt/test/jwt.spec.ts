@@ -43,51 +43,25 @@ describe.concurrent('JWT Core Functions', () => {
 			{
 				name: 'numeric expiration (seconds offset)',
 				getExpiration: (): number => ONE_HOUR,
-				expectedExpiration: (currentTime: number): number => currentTime + ONE_HOUR,
+				expectedExpiration: (timestampNow: number): number => timestampNow + ONE_HOUR,
 				tolerance: 5
 			},
 			{
-				name: 'Date expiration (2 hours)',
-				getExpiration: (): Date => new Date(Date.now() + TWO_HOURS * 1000),
-				expectedExpiration: (): number =>
-					Math.floor((Date.now() + TWO_HOURS * 1000) / 1000),
-				tolerance: 2
-			},
-			{
-				name: 'Date expiration (30 minutes)',
-				getExpiration: (): Date => new Date(Date.now() + 30 * 60 * 1000),
-				expectedExpiration: (): number => Math.floor((Date.now() + 30 * 60 * 1000) / 1000),
-				tolerance: 2
-			},
-			{
-				name: 'Date expiration (1 day)',
-				getExpiration: (): Date => new Date(Date.now() + 24 * 60 * 60 * 1000),
-				expectedExpiration: (): number =>
-					Math.floor((Date.now() + 24 * 60 * 60 * 1000) / 1000),
-				tolerance: 2
-			},
-			{
-				name: 'human-readable time expression (15 minutes)',
-				getExpiration: (): string => '15 m',
-				expectedExpiration: (currentTime: number): number => currentTime + 15 * 60,
+				name: 'numeric expiration (2 hours)',
+				getExpiration: (): number => TWO_HOURS,
+				expectedExpiration: (timestampNow: number): number => timestampNow + TWO_HOURS,
 				tolerance: 5
 			},
 			{
-				name: 'human-readable time expression (2 hours)',
-				getExpiration: (): string => '2 hours',
-				expectedExpiration: (currentTime: number): number => currentTime + TWO_HOURS,
+				name: 'numeric expiration (30 minutes)',
+				getExpiration: (): number => 30 * 60,
+				expectedExpiration: (timestampNow: number): number => timestampNow + 30 * 60,
 				tolerance: 5
 			},
 			{
-				name: 'human-readable time expression (30 minutes)',
-				getExpiration: (): string => '30 minutes',
-				expectedExpiration: (currentTime: number): number => currentTime + 30 * 60,
-				tolerance: 5
-			},
-			{
-				name: 'human-readable time expression (1 day)',
-				getExpiration: (): string => '1 day',
-				expectedExpiration: (currentTime: number): number => currentTime + 24 * 60 * 60,
+				name: 'numeric expiration (1 day)',
+				getExpiration: (): number => 24 * 60 * 60,
+				expectedExpiration: (timestampNow: number): number => timestampNow + 24 * 60 * 60,
 				tolerance: 5
 			}
 		])(
@@ -156,22 +130,6 @@ describe.concurrent('JWT Core Functions', () => {
 				getExpiration: (): number => -ONE_HOUR
 			},
 			{
-				name: 'Date object in past',
-				getExpiration: (): Date => new Date(Date.now() - ONE_HOUR * 1000)
-			},
-			{
-				name: 'human-readable expression (1 hour ago)',
-				getExpiration: (): string => '1 hour ago'
-			},
-			{
-				name: 'human-readable expression (30 minutes ago)',
-				getExpiration: (): string => '30 minutes ago'
-			},
-			{
-				name: 'human-readable expression (2 days ago)',
-				getExpiration: (): string => '2 days ago'
-			},
-			{
 				name: 'numeric offset equal to zero',
 				getExpiration: (): number => 0
 			}
@@ -189,7 +147,9 @@ describe.concurrent('JWT Core Functions', () => {
 						'Expiration time must be in the future'
 					);
 					expect((error as Exception).key).toBe(JWT_ERROR_KEYS.JWT_EXPIRATION_PASSED);
-					expect((error as Exception).cause).toEqual({ providedExpiration: expiration });
+					expect((error as Exception).cause).toEqual({
+						providedExpirationSeconds: expiration
+					});
 				}
 			}
 		);
@@ -424,23 +384,17 @@ describe.concurrent('JWT Core Functions', () => {
 			}
 		});
 
-		test('should handle different expiration formats consistently', async () => {
-			// Test different expiration formats that should result in similar expiration times
-			const token1 = await signJWT(testSecret, {}, ONE_HOUR); // numeric offset in seconds
-			const token2 = await signJWT(testSecret, {}, new Date(Date.now() + ONE_HOUR * 1000)); // Date object
-			const token3 = await signJWT(testSecret, {}, '1 hour'); // human-readable string
+		test('should handle numeric expiration consistently', async () => {
+			const token1 = await signJWT(testSecret, {}, ONE_HOUR);
+			const token2 = await signJWT(testSecret, {}, ONE_HOUR);
 
 			const result1 = await verifyJWT(token1, testSecret);
 			const result2 = await verifyJWT(token2, testSecret);
-			const result3 = await verifyJWT(token3, testSecret);
 
-			// All should have similar expiration times (within a few seconds)
 			const exp1 = result1.payload.exp ?? 0;
 			const exp2 = result2.payload.exp ?? 0;
-			const exp3 = result3.payload.exp ?? 0;
 
 			expect(Math.abs(exp1 - exp2)).toBeLessThan(2);
-			expect(Math.abs(exp1 - exp3)).toBeLessThan(10); // Allow more tolerance for string parsing
 		});
 	});
 
