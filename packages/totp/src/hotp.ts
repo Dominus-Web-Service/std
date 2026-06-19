@@ -38,14 +38,20 @@ export interface VerifyHOTPOptions extends GenerateHOTPOptions {
 const _importKey = (secret: Uint8Array<ArrayBuffer>, algorithm: OTPAlgorithm): Promise<CryptoKey> =>
 	crypto.subtle.importKey('raw', secret, { name: 'HMAC', hash: algorithm }, false, ['sign']);
 
+const _byteAt = (array: Uint8Array<ArrayBuffer>, index: number): number => {
+	const value = array[index];
+	if (value === undefined) throw new RangeError(`Index ${index} out of bounds`);
+	return value;
+};
+
 const _dynamicTruncate = (hmac: Uint8Array<ArrayBuffer>, digits: number): string => {
-	const offset = hmac[hmac.length - 1] & 0x0f;
+	const offset = _byteAt(hmac, hmac.length - 1) & 0x0f;
 	// rfc4226 5.4
 	const binary =
-		((hmac[offset] & 0x7f) << 24) |
-		((hmac[offset + 1] & 0xff) << 16) |
-		((hmac[offset + 2] & 0xff) << 8) |
-		(hmac[offset + 3] & 0xff);
+		((_byteAt(hmac, offset) & 0x7f) << 24) |
+		((_byteAt(hmac, offset + 1) & 0xff) << 16) |
+		((_byteAt(hmac, offset + 2) & 0xff) << 8) |
+		(_byteAt(hmac, offset + 3) & 0xff);
 	return (binary % 10 ** digits).toString().padStart(digits, '0');
 };
 
