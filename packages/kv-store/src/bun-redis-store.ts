@@ -11,16 +11,16 @@ export class BunRedisStore extends KvStore {
 	/**
 	 * Redis client instance. Initialized in the constructor and connected in the `connect` method.
 	 */
-	private readonly _redis: RedisClient;
+	private readonly redis: RedisClient;
 
 	public constructor(url?: string, options?: RedisOptions) {
 		super();
-		this._redis = new RedisClient(url, options);
+		this.redis = new RedisClient(url, options);
 	}
 
 	public override async connect(): Promise<void> {
 		try {
-			await this._redis.connect();
+			await this.redis.connect();
 		} catch (error) {
 			throw new Exception('Failed to connect to Redis', {
 				key: BUN_REDIS_STORE_ERROR_KEYS.CONNECTION_FAILED,
@@ -30,13 +30,13 @@ export class BunRedisStore extends KvStore {
 	}
 
 	public override close(): void {
-		this._redis.close();
+		this.redis.close();
 	}
 
 	public override async get<T = unknown>(key: string): Promise<T | null> {
-		KvStore._validateKey(key);
+		KvStore.validateKey(key);
 
-		const value = await this._redis.get(key);
+		const value = await this.redis.get(key);
 		if (value === null) return null;
 
 		try {
@@ -48,45 +48,45 @@ export class BunRedisStore extends KvStore {
 	}
 
 	public override async set<T = unknown>(key: string, value: T, ttlSec?: number): Promise<void> {
-		KvStore._validateKey(key);
-		KvStore._validateTtl(ttlSec);
+		KvStore.validateKey(key);
+		KvStore.validateTtl(ttlSec);
 
 		const stringValue = typeof value === 'string' ? value : JSON.stringify(value);
-		if (ttlSec) await this._redis.set(key, stringValue, 'EX', ttlSec);
-		else await this._redis.set(key, stringValue);
+		if (ttlSec) await this.redis.set(key, stringValue, 'EX', ttlSec);
+		else await this.redis.set(key, stringValue);
 	}
 
 	public override increment(key: string, amount = 1): Promise<number> {
-		KvStore._validateKey(key);
-		KvStore._validateAmount(amount);
-		return this._redis.incrby(key, amount);
+		KvStore.validateKey(key);
+		KvStore.validateAmount(amount);
+		return this.redis.incrby(key, amount);
 	}
 
 	public override decrement(key: string, amount = 1): Promise<number> {
-		KvStore._validateKey(key);
-		KvStore._validateAmount(amount);
-		return this._redis.decrby(key, amount);
+		KvStore.validateKey(key);
+		KvStore.validateAmount(amount);
+		return this.redis.decrby(key, amount);
 	}
 
 	public override del(key: string): Promise<boolean> {
-		KvStore._validateKey(key);
-		return this._redis.del(key).then((result) => result > 0);
+		KvStore.validateKey(key);
+		return this.redis.del(key).then((result) => result > 0);
 	}
 
 	public override expire(key: string, ttlSec: number): Promise<boolean> {
-		KvStore._validateKey(key);
-		KvStore._validateTtl(ttlSec);
-		return this._redis.expire(key, ttlSec).then((result) => result > 0);
+		KvStore.validateKey(key);
+		KvStore.validateTtl(ttlSec);
+		return this.redis.expire(key, ttlSec).then((result) => result > 0);
 	}
 
 	public override ttl(key: string): Promise<number> {
-		KvStore._validateKey(key);
-		return this._redis.ttl(key);
+		KvStore.validateKey(key);
+		return this.redis.ttl(key);
 	}
 
 	public override async clean(): Promise<number> {
-		const dbSize: number = (await this._redis.send('DBSIZE', [])) as number;
-		await this._redis.send('FLUSHDB', ['ASYNC']);
+		const dbSize: number = (await this.redis.send('DBSIZE', [])) as number;
+		await this.redis.send('FLUSHDB', ['ASYNC']);
 		return dbSize;
 	}
 }
