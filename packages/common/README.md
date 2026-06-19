@@ -63,7 +63,6 @@ parseHumanTime('1 hour from now'); // 3600
 
 Throws an `Exception` if the expression is invalid or the unit is unrecognised.
 
-
 ## 📚 API Reference
 
 Full docs: [Dominus-Web-Service.github.io/packages](https://Dominus-Web-Service.github.io/packages/)

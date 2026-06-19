@@ -159,7 +159,9 @@ describe.concurrent('parseHumanTime', () => {
 			['1 hour ago', 'minutes', -60],
 			['+2 days', 'hours', 48]
 		])('should convert "%s" to %s as %d', (input, unit, expected) => {
-			expect(parseHumanTime(input, unit as Parameters<typeof parseHumanTime>[1])).toBe(expected);
+			expect(parseHumanTime(input, unit as Parameters<typeof parseHumanTime>[1])).toBe(
+				expected
+			);
 		});
 	});
 
@@ -246,9 +248,12 @@ describe.concurrent('parseHumanTime', () => {
 			['2.5 hours', 9000],
 			['0.5 days', 43200],
 			['1.5 weeks', 907200]
-		])('should handle fractional calculation "%s" correctly as %i seconds', (input, expected) => {
-			expect(parseHumanTime(input)).toBe(expected);
-		});
+		])(
+			'should handle fractional calculation "%s" correctly as %i seconds',
+			(input, expected) => {
+				expect(parseHumanTime(input)).toBe(expected);
+			}
+		);
 	});
 
 	describe('boundary testing', () => {
