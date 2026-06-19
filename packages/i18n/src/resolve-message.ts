@@ -1,7 +1,7 @@
 import type { LocalizedHttpException } from './exception/localized-http-exception';
 import type { LocalizedMessage } from './message/type/localized-message';
 
-const _interpolate = (template: string, params: Readonly<Record<string, string>>): string =>
+const interpolate = (template: string, params: Readonly<Record<string, string>>): string =>
 	template.replace(
 		/\{\{(\w+)\}\}/g,
 		(_: string, key: string): string => params[key] ?? `{{${key}}}`
@@ -25,5 +25,5 @@ export const resolveMessage = (
 	locale?: string
 ): string =>
 	target.params
-		? _interpolate(target.translations[locale ?? target.defaultLocale] ?? '', target.params)
+		? interpolate(target.translations[locale ?? target.defaultLocale] ?? '', target.params)
 		: (target.translations[locale ?? target.defaultLocale] ?? '');
