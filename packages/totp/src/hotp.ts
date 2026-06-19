@@ -35,23 +35,23 @@ export interface VerifyHOTPOptions extends GenerateHOTPOptions {
 	readonly window?: number | undefined;
 }
 
-const _importKey = (secret: Uint8Array<ArrayBuffer>, algorithm: OTPAlgorithm): Promise<CryptoKey> =>
+const importKey = (secret: Uint8Array<ArrayBuffer>, algorithm: OTPAlgorithm): Promise<CryptoKey> =>
 	crypto.subtle.importKey('raw', secret, { name: 'HMAC', hash: algorithm }, false, ['sign']);
 
-const _byteAt = (array: Uint8Array<ArrayBuffer>, index: number): number => {
+const byteAt = (array: Uint8Array<ArrayBuffer>, index: number): number => {
 	const value = array[index];
 	if (value === undefined) throw new RangeError(`Index ${index} out of bounds`);
 	return value;
 };
 
-const _dynamicTruncate = (hmac: Uint8Array<ArrayBuffer>, digits: number): string => {
-	const offset = _byteAt(hmac, hmac.length - 1) & 0x0f;
+const dynamicTruncate = (hmac: Uint8Array<ArrayBuffer>, digits: number): string => {
+	const offset = byteAt(hmac, hmac.length - 1) & 0x0f;
 	// rfc4226 5.4
 	const binary =
-		((_byteAt(hmac, offset) & 0x7f) << 24) |
-		((_byteAt(hmac, offset + 1) & 0xff) << 16) |
-		((_byteAt(hmac, offset + 2) & 0xff) << 8) |
-		(_byteAt(hmac, offset + 3) & 0xff);
+		((byteAt(hmac, offset) & 0x7f) << 24) |
+		((byteAt(hmac, offset + 1) & 0xff) << 16) |
+		((byteAt(hmac, offset + 2) & 0xff) << 8) |
+		(byteAt(hmac, offset + 3) & 0xff);
 	return (binary % 10 ** digits).toString().padStart(digits, '0');
 };
 
@@ -82,9 +82,9 @@ export const generateHOTP = async (options: GenerateHOTPOptions): Promise<string
 	const counterBuffer = createCounterBuffer(counter);
 
 	try {
-		const key = await _importKey(secretBytes, algorithm);
+		const key = await importKey(secretBytes, algorithm);
 		const hmacBuffer = await crypto.subtle.sign('HMAC', key, counterBuffer);
-		return _dynamicTruncate(new Uint8Array(hmacBuffer), digits);
+		return dynamicTruncate(new Uint8Array(hmacBuffer), digits);
 	} catch (error) {
 		if (error instanceof Exception) throw error;
 		throw new Exception('HMAC computation failed', {
