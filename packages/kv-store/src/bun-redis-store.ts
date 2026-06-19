@@ -11,7 +11,7 @@ export class BunRedisStore extends KvStore {
 	/**
 	 * Redis client instance. Initialized in the constructor and connected in the `connect` method.
 	 */
-	private _redis: RedisClient;
+	private readonly _redis: RedisClient;
 
 	public constructor(url?: string, options?: RedisOptions) {
 		super();
