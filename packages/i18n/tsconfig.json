@@ -13,7 +13,7 @@
 		"noImplicitReturns": true,
 		"noImplicitThis": true, // because of `strict`
 		"noPropertyAccessFromIndexSignature": false,
-		"noUncheckedIndexedAccess": false,
+		"noUncheckedIndexedAccess": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		// —————————————— Modules —————————————— //
