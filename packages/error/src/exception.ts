@@ -43,6 +43,6 @@ export class Exception<const TCause = unknown> extends Error {
 		this.cause = init?.cause;
 		this.key = init?.key;
 		this.name = new.target.name;
-		if (Error.captureStackTrace) Error.captureStackTrace(this, new.target);
+		Error.captureStackTrace(this, new.target);
 	}
 }

@@ -10,7 +10,7 @@ export const JWT_ERROR_KEYS = {
 } as const;
 
 // Avoid re-instantiation on each call
-const _textEncoder = new TextEncoder();
+const textEncoder = new TextEncoder();
 
 export interface VerifyOptions {
 	issuer?: string;
@@ -61,7 +61,7 @@ export const signJWT = (
 	try {
 		return new SignJWT(finalPayload)
 			.setProtectedHeader({ alg: 'HS256', typ: 'JWT'})
-			.sign(_textEncoder.encode(secret));
+			.sign(textEncoder.encode(secret));
 	} catch (error) {
 		throw new Exception('Failed to sign JWT', {
 			key: JWT_ERROR_KEYS.JWT_SIGN_ERROR,
@@ -87,7 +87,7 @@ export const verifyJWT = async (
 	options?: VerifyOptions
 ): Promise<JWTVerifyResult> => {
 	try {
-		return await jwtVerify(token, _textEncoder.encode(secret), {
+		return await jwtVerify(token, textEncoder.encode(secret), {
 			algorithms: ['HS256'],
 			...(options?.issuer && { issuer: options.issuer }),
 			...(options?.audience && { audience: options.audience })

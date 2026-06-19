@@ -4,7 +4,7 @@ import { resolveMessage } from '#/resolve-message';
 import type { LocalizedMessage } from '#/message/type/localized-message';
 import { LocalizedHttpException } from '#/exception/localized-http-exception';
 
-const _makeMessage = (overrides: Partial<LocalizedMessage> = {}): LocalizedMessage => ({
+const makeMessage = (overrides: Partial<LocalizedMessage> = {}): LocalizedMessage => ({
 	translations: { en: 'Hello', fr: 'Bonjour' },
 	defaultLocale: 'en',
 	...overrides
@@ -12,25 +12,25 @@ const _makeMessage = (overrides: Partial<LocalizedMessage> = {}): LocalizedMessa
 
 describe.concurrent('resolveMessage', (): void => {
 	test('should return the default locale translation when no locale is specified', (): void => {
-		const msg = _makeMessage();
+		const msg = makeMessage();
 
 		expect(resolveMessage(msg)).toBe('Hello');
 	});
 
 	test('should return the requested locale translation', (): void => {
-		const msg = _makeMessage();
+		const msg = makeMessage();
 
 		expect(resolveMessage(msg, 'fr')).toBe('Bonjour');
 	});
 
 	test('should return an empty string when the requested locale does not exist', (): void => {
-		const msg = _makeMessage();
+		const msg = makeMessage();
 
 		expect(resolveMessage(msg, 'ja')).toBe('');
 	});
 
 	test('should interpolate a single parameter', (): void => {
-		const msg = _makeMessage({
+		const msg = makeMessage({
 			translations: { en: 'Hello, {{name}}!' },
 			params: { name: 'Alice' }
 		});
@@ -39,7 +39,7 @@ describe.concurrent('resolveMessage', (): void => {
 	});
 
 	test('should interpolate multiple parameters', (): void => {
-		const msg = _makeMessage({
+		const msg = makeMessage({
 			translations: { en: 'TTL must be between {{min}} and {{max}}' },
 			params: { min: '60', max: '86400' }
 		});
@@ -48,7 +48,7 @@ describe.concurrent('resolveMessage', (): void => {
 	});
 
 	test('should keep placeholder when param is missing from the record', (): void => {
-		const msg = _makeMessage({
+		const msg = makeMessage({
 			translations: { en: 'Hello, {{name}}!' },
 			params: {}
 		});
@@ -57,7 +57,7 @@ describe.concurrent('resolveMessage', (): void => {
 	});
 
 	test('should interpolate params in the requested locale', (): void => {
-		const msg = _makeMessage({
+		const msg = makeMessage({
 			translations: {
 				en: 'Zone "{{zone}}" created',
 				fr: 'Zone "{{zone}}" créée'
@@ -69,7 +69,7 @@ describe.concurrent('resolveMessage', (): void => {
 	});
 
 	test('should not interpolate when params is undefined', (): void => {
-		const msg = _makeMessage({
+		const msg = makeMessage({
 			translations: { en: 'No params {{here}}' },
 			params: undefined
 		});
@@ -90,7 +90,7 @@ describe.concurrent('resolveMessage', (): void => {
 	});
 
 	test('should handle templates with adjacent placeholders', (): void => {
-		const msg = _makeMessage({
+		const msg = makeMessage({
 			translations: { en: '{{a}}{{b}}' },
 			params: { a: 'X', b: 'Y' }
 		});
@@ -99,7 +99,7 @@ describe.concurrent('resolveMessage', (): void => {
 	});
 
 	test('should ignore malformed placeholders', (): void => {
-		const msg = _makeMessage({
+		const msg = makeMessage({
 			translations: { en: 'Hello {name} and {{ spaced }}' },
 			params: { name: 'Alice', ' spaced ': 'nope' }
 		});

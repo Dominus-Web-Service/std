@@ -1,7 +1,7 @@
+import { HttpException } from '@dws-std/error';
 import { describe, expect, test } from 'bun:test';
 
 import { LocalizedHttpException } from '#/exception/localized-http-exception';
-import { HttpException } from '@dws-std/error';
 import { resolveMessage } from '#/resolve-message';
 
 describe.concurrent('LocalizedHttpException', (): void => {
