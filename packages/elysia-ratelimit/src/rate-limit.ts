@@ -7,7 +7,7 @@ import { Elysia, type HTTPHeaders, type StatusMap } from 'elysia';
 import { rateLimitContract } from './rate-limit.contract';
 
 export const RATE_LIMIT_ERROR_KEYS = {
-	RATE_LIMIT_EXCEEDED: 'rate-limit.exceeded'
+	RATE_LIMIT_EXCEEDED: 'elysia-ratelimit.exceeded'
 } as const;
 
 export interface RateLimitKeyContext {
