@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./logo-registry.png" alt="DWS Registry logo" width="200" />
+</p>
+
 # 🎯 DWS Registry
 
 If you've ever copy-pasted a `getInstance()` pattern into yet another class, this package is for you.
@@ -97,7 +101,7 @@ Registry.register('DatabaseConnection', new DatabaseConnection());
 
 ## 📚 API Reference
 
-Full docs: [Dominus-Web-Service.github.io/packages](https://Dominus-Web-Service.github.io/packages/)
+Full docs: [https://dominus-web-service.github.io/std/](https://dominus-web-service.github.io/std/)
 
 ## ⚖️ License
 

@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./logo-totp.png" alt="DWS TOTP logo" width="200" />
+</p>
+
 # 🔐 DWS TOTP
 
 Generate and verify HOTP and TOTP codes with sensible defaults.
@@ -237,7 +241,7 @@ try {
 
 ## 📚 API Reference
 
-Full docs: [Dominus-Web-Service.github.io/packages](https://Dominus-Web-Service.github.io/packages/)
+Full docs: [https://dominus-web-service.github.io/std/](https://dominus-web-service.github.io/std/)
 
 ## ⚖️ License
 
