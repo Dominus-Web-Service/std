@@ -42,8 +42,6 @@ This package runs everything in a worker thread, batches automatically, and stil
 bun add @dws-std/logger
 ```
 
-> **Peer dependency:** `@dws-std/error` must be installed alongside.
-
 ## ⚙️ Usage
 
 ### Basic Setup
