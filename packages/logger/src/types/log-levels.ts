@@ -1,0 +1,1 @@
+export type LogLevels = 'ERROR' | 'WARN' | 'INFO' | 'DEBUG' | 'LOG' | 'TRACE';
