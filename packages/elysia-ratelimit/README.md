@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./logo-elysia-ratelimit.png" alt="DWS Elysia Rate Limit logo" width="200" />
+</p>
+
 # 🚦 DWS Elysia Rate Limit
 
 Rate limiting for Elysia routes, guards, and groups, as a macro.  
@@ -100,7 +104,7 @@ new Elysia()
 
 ## 📚 API Reference
 
-Full docs: [Dominus-Web-Service.github.io/packages](https://Dominus-Web-Service.github.io/packages/)
+Full docs: [https://dominus-web-service.github.io/std/](https://dominus-web-service.github.io/std/)
 
 ## ⚖️ License
 
